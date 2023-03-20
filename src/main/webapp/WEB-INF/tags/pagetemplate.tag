@@ -18,26 +18,38 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="${pageContext.request.contextPath}/images/cphbusiness.png" width="400px;" class="img-fluid"/>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
-                    <c:if test="${sessionScope.user == null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
-                    </c:if>
-                    <c:if test="${sessionScope.user != null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
-                    </c:if>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container mt-1">
+            <div class="row col">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="col-6 justify-content-start">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Orders</a>
+                        <c:set var = "requiredRole" value="admin" scope="page"></c:set>
+                        <c:if test="${sessionScope.user != null && sessionScope.user.role.equalsIgnoreCase(requiredRole)}">
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Customers</a>
+                        </c:if>
+                    </div>
+                </div>
+                <div class="col-6 collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <c:if test="${sessionScope.user == null }">
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
+                        </c:if>
+                        <c:if test="${sessionScope.user != null }">
+                            <p class="nav-item nav-link mb-0">Welcome ${sessionScope.user.username}</p>
+                            <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/logout">Log out</a>
+                            <p class="nav-item nav-link mb-0">0.00 DKK</p>
+                            <a class="nav-item nav-link mb-0" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                </svg>
+                            </a>
+                        </c:if>
+                    </div>
                 </div>
             </div>
         </div>

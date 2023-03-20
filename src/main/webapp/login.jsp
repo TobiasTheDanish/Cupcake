@@ -20,14 +20,14 @@
             <form action="login" method="post">
                 <tr>
                     <td><label for="email">Email: </label></td>
-                    <td><input type="email" id="email" name="email"/></td><br><br>
+                    <td><input type="email" id="email" name="email"/></td>
                 </tr>
                 <tr>
                     <td><label for="password">Password: </label></td>
-                    <td><input type="password" id="password" name="password"/></td><br><br>
+                    <td><input type="password" id="password" name="password"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Log in"/></td><br>
+                    <td><input type="submit" value="Log in"/></td>
                 </tr>
             </form>
         </table>
