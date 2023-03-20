@@ -15,15 +15,23 @@
 
     <jsp:body>
 
-        <h3>You can log in here</h3>
-
-        <form action="login" method="post">
-            <label for="username">Username: </label>
-            <input type="text" id="username" name="username"/>
-            <label for="password">Password: </label>
-            <input type="password" id="password" name="password"/>
-            <input type="submit"  value="Log in"/>
-        </form>
+        <table>
+            <h6>${requestScope.errormessage}</h6>
+            <form action="login" method="post">
+                <tr>
+                    <td><label for="email">Email: </label></td>
+                    <td><input type="email" id="email" name="email"/></td><br><br>
+                </tr>
+                <tr>
+                    <td><label for="password">Password: </label></td>
+                    <td><input type="password" id="password" name="password"/></td><br><br>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Log in"/></td><br>
+                </tr>
+            </form>
+        </table>
+        <p>Not already registered? <a href="registration.jsp">Register here</a></p>
 
     </jsp:body>
 </t:pagetemplate>

@@ -59,11 +59,7 @@
         </div>
         <div class="col">
             <jsp:invoke fragment="footer"/><br/>
-            <p>&copy; 2022 Cphbusiness</p>
-        </div>
-        <div class="col">
-            Datamatikeruddannelsen<br/>
-            2. semester efterår 2022
+            <p>&copy; 2022 Olsker Cupcakes</p>
         </div>
     </div>
 

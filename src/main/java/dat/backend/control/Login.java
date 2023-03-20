@@ -36,7 +36,7 @@ public class Login extends HttpServlet
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope
-        String username = request.getParameter("username");
+        String username = request.getParameter("email");
         String password = request.getParameter("password");
 
         try
@@ -49,7 +49,7 @@ public class Login extends HttpServlet
         catch (DatabaseException e)
         {
             request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
