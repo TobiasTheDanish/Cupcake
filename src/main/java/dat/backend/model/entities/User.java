@@ -4,11 +4,9 @@ import java.util.Objects;
 
 public class User
 {
-    private int id;
     private String username;
     private String password;
     private String role;
-    private float currency;
 
     public User(String username, String password, String role)
     {
@@ -23,6 +21,18 @@ public class User
         this.username = username;
         this.password = password;
         this.role = role;
+        this.currency = currency;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public float getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(float currency) {
         this.currency = currency;
     }
 
@@ -54,18 +64,6 @@ public class User
     public void setRole(String role)
     {
         this.role = role;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public float getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(float currency) {
-        this.currency = currency;
     }
 
     @Override
