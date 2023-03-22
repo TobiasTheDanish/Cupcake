@@ -75,5 +75,8 @@ class UserMapper {
         }
     }
 
-   
+
+    public static List<User> getAll(ConnectionPool connectionPool) {
+        return null;
+    }
 }
