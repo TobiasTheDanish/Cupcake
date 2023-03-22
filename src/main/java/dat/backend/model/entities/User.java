@@ -4,9 +4,11 @@ import java.util.Objects;
 
 public class User
 {
+    private int id;
     private String username;
     private String password;
     private String role;
+    private float currency;
 
     public User(String username, String password, String role)
     {
