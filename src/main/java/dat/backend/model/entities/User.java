@@ -85,12 +85,12 @@ public class User
     }
 
     @Override
-    public String toString()
-    {
-        return "User{" +
-                "brugerNavn='" + username + '\'' +
-                ", kodeord='" + password + '\'' +
-                ", rolle='" + role + '\'' +
-                '}';
+    public String toString() {
+        return "User: " +
+                " user_id: " + id +
+                ", username: " + username +
+                ", password: " + password +
+                ", role: " + role +
+                ", currency: " + currency;
     }
 }
