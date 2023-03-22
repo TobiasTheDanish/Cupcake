@@ -18,6 +18,10 @@
 
         <c:if test="${sessionScope.user != null}">
             <p>You are logged in with the role of "${sessionScope.user.role}".</p>
+
+            <form action="CreateOrderServlet" method="get">
+                <input type="submit" value="Create Order Here">
+            </form>
         </c:if>
 
         <c:if test="${sessionScope.user == null}">
