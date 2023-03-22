@@ -1,12 +1,14 @@
 package dat.backend.model.entities;
 
-public class Product {
+public class OrderItem {
     private Bottom bottom;
     private Topping topping;
+    private int amount;
 
-    public Product(Bottom bottom, Topping topping) {
+    public OrderItem(Bottom bottom, Topping topping, int amount) {
         this.bottom = bottom;
         this.topping = topping;
+        this.amount = amount;
     }
 
     public Bottom getBottom() {
@@ -17,7 +19,11 @@ public class Product {
         return topping;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public float getPrice() {
-        return bottom.getPrice() + topping.getPrice();
+        return (bottom.getPrice() + topping.getPrice()) * amount;
     }
 }

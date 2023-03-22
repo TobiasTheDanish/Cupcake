@@ -23,8 +23,10 @@ class UserMapper {
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    int id = rs.getInt("user_id");
                     String role = rs.getString("role");
-                    user = new User(email, password, role);
+                    float wallet = rs.getFloat("wallet");
+                    user = new User(id, email, password, role, wallet);
                 } else {
                     throw new DatabaseException("Wrong email or password");
                 }
@@ -53,7 +55,7 @@ class UserMapper {
             }
         }
         catch (SQLException ex) {
-            throw new DatabaseException(ex, "Could not insert email into database");
+            throw new DatabaseException(ex, "Could not insert user into database");
         }
         return user;
     }
