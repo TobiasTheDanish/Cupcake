@@ -19,32 +19,26 @@ import java.util.logging.Logger;
  */
 
 @WebListener
-public class ApplicationStart implements ServletContextListener
-{
+public class ApplicationStart implements ServletContextListener{
     private static ConnectionPool connectionPool;
 
-    public ApplicationStart()
-    {
+    public ApplicationStart(){
 
     }
 
     @Override
-    public void contextInitialized(ServletContextEvent sce)
-    {
+    public void contextInitialized(ServletContextEvent sce) {
         Logger.getLogger("web").log(Level.INFO, "Starting up application and connection pool");
-        try
-        {
+        try {
             Class.forName("org.slf4j.impl.StaticLoggerBinder");
             connectionPool = new ConnectionPool();
         }
-        catch (ClassNotFoundException e)
-        {
+        catch (ClassNotFoundException e) {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
-    public static ConnectionPool getConnectionPool()
-    {
+    public static ConnectionPool getConnectionPool() {
             return connectionPool;
     }
 

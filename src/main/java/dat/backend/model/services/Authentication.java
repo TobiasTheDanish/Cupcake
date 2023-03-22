@@ -10,8 +10,7 @@ public class Authentication
     {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user != null)
-        {
+        if (user != null) {
             return user.getRole().equals(role);
         }
         return false;
