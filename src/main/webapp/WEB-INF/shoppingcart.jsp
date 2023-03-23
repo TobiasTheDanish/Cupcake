@@ -46,6 +46,13 @@
                             <p class="card-text text-dark">Amount: 7</p>
                         </div>
                         <div class="card-footer bg-transparent text-dark">Price: 13 DKK</div>
+                        <br>
+                        <br>
+                        <form action="shoppingCartServlet" method="post">
+                            <input type="submit" name="action" value="Remove">
+                        </form>
+
+
                     </div>
 
                 </div>
@@ -61,6 +68,12 @@
                             <p class="card-text text-dark">Amount: 4</p>
                         </div>
                         <div class="card-footer bg-transparent text-dark">Price: 11 DKK</div>
+                        <br>
+                        <br>
+                        <form action="shoppingCartServlet" method="post">
+                            <input type="submit" name="action" value="Remove">
+                        </form>
+
                     </div>
                 </div>
 
@@ -78,6 +91,12 @@
 
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <form action="shoppingCartServlet" method="post">
+            <input type="submit" value="Order">
+        </form>
     </jsp:body>
 
 </t:pagetemplate>
