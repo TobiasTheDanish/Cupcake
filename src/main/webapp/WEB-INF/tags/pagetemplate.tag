@@ -42,7 +42,7 @@
                             <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                         </c:if>
                         <c:if test="${sessionScope.user != null }">
-                            <p class="nav-item nav-link mb-0">${sessionScope.user.username}</p>
+                            <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/AdminHomePage">${sessionScope.user.username}</a>
                             <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/logout">Log out</a>
                             <p class="nav-item nav-link mb-0">0.00 DKK</p>
                             <a class="nav-item nav-link mb-0" href="#">
