@@ -1,22 +1,21 @@
 package dat.backend.control;
 
-import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
-import dat.backend.model.exceptions.DatabaseException;
-import dat.backend.model.persistence.UserFacade;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "AdminServlet", value = "/AdminServlet")
-public class AdminServlet extends HttpServlet {
+@WebServlet(name = "OrderServlet", value = "/OrderServlet")
+public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user.getRole().equalsIgnoreCase("admin")){
+            request.getRequestDispatcher("WEB-INF/adminOrders.jsp").forward(request, response);
+        }
     }
 
     @Override

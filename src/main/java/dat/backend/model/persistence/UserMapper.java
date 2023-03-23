@@ -5,6 +5,7 @@ import dat.backend.model.exceptions.DatabaseException;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,10 @@ class UserMapper {
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    int id = rs.getInt("user_id");
                     String role = rs.getString("role");
-                    user = new User(email, password, role);
+                    float wallet = rs.getFloat("wallet");
+                    user = new User(id, email, password, role, wallet);
                 } else {
                     throw new DatabaseException("Wrong email or password");
                 }
@@ -53,7 +56,7 @@ class UserMapper {
             }
         }
         catch (SQLException ex) {
-            throw new DatabaseException(ex, "Could not insert email into database");
+            throw new DatabaseException(ex, "Could not insert user into database");
         }
         return user;
     }
@@ -75,8 +78,29 @@ class UserMapper {
         }
     }
 
+    public static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "SELECT * FROM user";
 
-    public static List<User> getAll(ConnectionPool connectionPool) {
-        return null;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+                ResultSet res = preparedStatement.executeQuery();
+                List<User> userList = new ArrayList<>();
+                while (res.next()){
+                    int userid = res.getInt("user_id");
+                    String email = res.getString("email");
+                    String password = res.getString("password");
+                    String role = res.getString("role");
+                    int wallet = res.getInt("wallet");
+                    User user = new User(userid,email,password,role,wallet);
+                    userList.add(user);
+                }
+
+                return userList;
+            }
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables, throwables.getMessage());
+        }
     }
 }

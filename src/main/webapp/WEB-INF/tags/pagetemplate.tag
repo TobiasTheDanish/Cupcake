@@ -27,7 +27,9 @@
                 </button>
                 <div class="col-6 justify-content-start">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Orders</a>
+                        <c:if test="${sessionScope.user != null}">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/OrderServlet">Orders</a>
+                        </c:if>
                         <c:set var = "requiredRole" value="admin" scope="page"></c:set>
                         <c:if test="${sessionScope.user != null && sessionScope.user.role.equalsIgnoreCase(requiredRole)}">
                             <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Customers</a>
@@ -40,7 +42,7 @@
                             <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                         </c:if>
                         <c:if test="${sessionScope.user != null }">
-                            <p class="nav-item nav-link mb-0">Welcome ${sessionScope.user.username}</p>
+                            <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/AdminHomePage">${sessionScope.user.username}</a>
                             <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/logout">Log out</a>
                             <p class="nav-item nav-link mb-0">0.00 DKK</p>
                             <a class="nav-item nav-link mb-0" href="${pageContext.request.contextPath}/shoppingCart">

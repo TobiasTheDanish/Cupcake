@@ -20,7 +20,7 @@ public class UserFacade {
         return UserMapper.createUser(email, password, role, connectionPool);
     }
 
-    public static List<User> getAll(ConnectionPool connectionPool) {
+    public static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.getAll(connectionPool);
     }
 }
