@@ -49,9 +49,15 @@
                         <br>
                         <br>
                         <form action="shoppingCartServlet" method="post">
+                            <input type="hidden" name="cupCakeId" value="1">
                             <input type="submit" name="action" value="Remove">
-                        </form>
 
+
+                        <form action="shoppingCartServlet" method="post">
+                            <input type="hidden" name="cupCakeId" value="2">
+                            <input type="submit" name="action" value="Edit">
+                        </form>
+                        </form>
 
                     </div>
 
@@ -59,7 +65,7 @@
                 <br>
                 <div class="col-sm">
                     <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <div class="card-header bg-transparent text-dark"><h5 class="card-title">Cupcake 3</h5>
+                        <div class="card-header bg-transparent text-dark"><h5 class="card-title">Cupcake 2</h5>
 
 
                         </div>
@@ -71,8 +77,16 @@
                         <br>
                         <br>
                         <form action="shoppingCartServlet" method="post">
+                            <input type="hidden" name="cupCakeId" value="2">
                             <input type="submit" name="action" value="Remove">
+                            <form action="shoppingCartServlet" method="post">
+                                <input type="hidden" name="cupCakeId" value="2">
+                                <input type="submit" name="action" value="Edit">
+                            </form>
                         </form>
+
+
+
 
                     </div>
                 </div>
