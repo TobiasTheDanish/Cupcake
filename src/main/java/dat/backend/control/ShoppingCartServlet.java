@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "shoppingCartServlet", value = "/shoppingCartServlet")
+@WebServlet(name = "shoppingCartServlet", urlPatterns = "/shoppingCartServlet")
 public class ShoppingCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,9 +16,9 @@ public class ShoppingCartServlet extends HttpServlet {
             User user = (User) session.getAttribute("user");
 
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/shoppingcart.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/shoppingcart.jsp");
         dispatcher.forward(request, response);
-        response.sendRedirect("shoppingcart.jsp");
+        response.sendRedirect("WEB-INF/shoppingcart.jsp");
     }
 
     @Override
