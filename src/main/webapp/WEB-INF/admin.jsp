@@ -1,4 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page errorPage="../error.jsp" isErrorPage="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: tobiasberg
@@ -12,10 +15,22 @@
     <title>Title</title>
 </head>
 <body>
-View User List:
-<form action="AdminUserListServlet">
-    <input type="submit" value="User List">
-</form>
+<t:pagetemplate>
+<jsp:attribute name="header">
+         Admin site
+    </jsp:attribute>
+
+<jsp:attribute name="footer">
+        Admin
+    </jsp:attribute>
+
+<jsp:body>
+    View User List:
+    <form action="AdminUserListServlet">
+        <input type="submit" value="User List">
+    </form>
+    </jsp:body>
+    </t:pagetemplate>
 
 </body>
 </html>

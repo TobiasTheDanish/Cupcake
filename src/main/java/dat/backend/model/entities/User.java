@@ -87,10 +87,10 @@ public class User
     @Override
     public String toString() {
         return "User: " +
-                " user_id: " + id +
-                ", username: " + username +
-                ", password: " + password +
-                ", role: " + role +
-                ", currency: " + currency;
+                " UserID: " + id +
+                ", Email: " + username +
+                ", Password: " + password +
+                ", Role: " + role +
+                ", Wallet: " + currency;
     }
 }
