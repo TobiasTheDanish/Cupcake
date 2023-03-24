@@ -22,7 +22,8 @@ public class OrderMapper {
 
                 while (rs.next()) {
                     int id = rs.getInt("order_id");
-                    User user = UserMapper.getUser(id, connectionPool);
+                    int user_id = rs.getInt("user_id");
+                    User user = UserMapper.getUser(user_id, connectionPool);
 
                     orders.add(new Order(id, user));
                 }
