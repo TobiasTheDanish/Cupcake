@@ -34,7 +34,7 @@
             <div class="row">
                 <c:forEach var="order" items="${requestScope.orders}">
                     <div class="col-sm">
-                        <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <div class="card border-dark mb-3" style="max-width: 18rem; background: #F2ECEB">
                             <div class="card-header bg-transparent text-dark"><h5 class="card-title">Order ${order.id}</h5>
                                 <p class="card-subtitle text-secondary">Customer: ${order.customer.username}</p>
 

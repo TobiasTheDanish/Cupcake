@@ -27,7 +27,7 @@
 <jsp:body>
     View User List:
     <form action="AdminUserListServlet">
-        <input type="submit" value="User List">
+        <input style="background: #F2ECEB" type="submit" value="User List">
     </form>
     </jsp:body>
     </t:pagetemplate>

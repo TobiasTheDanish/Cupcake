@@ -23,6 +23,9 @@
         .cc-bg-blue{
             background: #C6D2ED;
         }
+        .cc-bg-white{
+            background: #F2ECEB;
+        }
         .cc-blue{
             color: #C6D2ED;
         }
