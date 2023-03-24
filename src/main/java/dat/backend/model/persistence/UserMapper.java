@@ -78,7 +78,7 @@ class UserMapper {
         }
     }
 
-    public static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
+    static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * FROM user";
 
@@ -102,5 +102,29 @@ class UserMapper {
         } catch (SQLException throwables) {
             throw new DatabaseException(throwables, throwables.getMessage());
         }
+    }
+
+    static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT * FROM user WHERE user_id=?";
+
+        try (Connection connection = connectionPool.getConnection()){
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String email = rs.getString("email");
+                String pw = rs.getString("password");
+                String role = rs.getString("role");
+                int wallet = rs.getInt("wallet");
+
+                return new User(id, email, pw, role, wallet);
+            }
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables.getMessage());
+        }
+        return null;
     }
 }

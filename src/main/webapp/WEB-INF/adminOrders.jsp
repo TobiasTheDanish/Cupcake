@@ -32,47 +32,23 @@
     <jsp:body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm">
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <div class="card-header bg-transparent text-dark"><h5 class="card-title">Order 2</h5>
-                            <p class="card-subtitle text-secondary"> #12324 </p>
+                <c:forEach var="order" items="${requestScope.orders}">
+                    <div class="col-sm">
+                        <div class="card border-dark mb-3" style="max-width: 18rem;">
+                            <div class="card-header bg-transparent text-dark"><h5 class="card-title">Order ${order.id}</h5>
+                                <p class="card-subtitle text-secondary">Kunde: ${order.customer.username}</p>
 
+                            </div>
+                            <div class="card-body">
+                                <c:forEach var="item" items="${order.orderItems}">
+                                    <h5 class="card-title text-dark">${item.bottom.flavor}/${item.topping.flavor}</h5>
+                                    <p class="card-text text-dark">Amount: ${item.amount}</p>
+                                </c:forEach>
+                            </div>
+                            <div class="card-footer bg-transparent text-dark">Price: ${order.price} DKK</div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-dark">Vanilla / Orange</h5>
-                            <p class="card-text text-dark">Amount: 7</p>
-                        </div>
-                        <div class="card-footer bg-transparent text-dark">Price: 13 DKK</div>
                     </div>
-
-                </div>
-        <br>
-                <div class="col-sm">
-        <div class="card border-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent text-dark"><h5 class="card-title">Order 2</h5>
-                    <p class="card-subtitle text-secondary"> #12324 </p>
-
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-dark">Chocolate / Strawberry</h5>
-                <p class="card-text text-dark">Amount: 4</p>
-            </div>
-            <div class="card-footer bg-transparent text-dark">Price: 11 DKK</div>
-        </div>
-                </div>
-
-                <div class="col-sm">
-
-                </div>
-
-                <div class="col-sm">
-
-                </div>
-
-                <div class="col-sm">
-
-                </div>
-
+                </c:forEach>
             </div>
         </div>
     </jsp:body>

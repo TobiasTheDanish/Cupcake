@@ -10,6 +10,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OrderMapper {
+    static List<Order> getAllOrders(ConnectionPool connectionPool) throws DatabaseException {
+        List<Order> orders = new ArrayList<>();
+
+        String sql = "SELECT * FROM orders";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    int id = rs.getInt("order_id");
+                    User user = UserMapper.getUser(id, connectionPool);
+
+                    orders.add(new Order(id, user));
+                }
+            }
+
+            for (Order order : orders) {
+                sql = "SELECT * FROM orderlinking WHERE order_id=?";
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setInt(1, order.getId());
+
+                    ResultSet rs = ps.executeQuery();
+
+                    while (rs.next()) {
+                        int toppingId = rs.getInt("topping_id");
+                        int bottomId = rs.getInt("bottom_id");
+                        int amount = rs.getInt("amount");
+
+                        Topping topping = getTopping(toppingId, connectionPool);
+                        Bottom bottom = getBottom(bottomId, connectionPool);
+
+                        order.addItem(new OrderItem(bottom, topping, amount));
+                    }
+                }
+            }
+
+            return orders;
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables.getMessage());
+        }
+    }
+
     static Order createOrder(Order newOrder, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "INSERT INTO orders (user_id) VALUES (?)";
         int orderId = 0;
