@@ -3,6 +3,7 @@ package dat.backend.model.persistence;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserFacade {
@@ -22,5 +23,9 @@ public class UserFacade {
 
     public static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.getAll(connectionPool);
+    }
+
+    public static boolean editWallet(float wallet, int id, ConnectionPool connectionPool) throws DatabaseException {
+        return UserMapper.editWallet(wallet, id, connectionPool);
     }
 }

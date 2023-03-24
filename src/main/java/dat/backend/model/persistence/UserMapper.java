@@ -1,5 +1,6 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 class UserMapper {
     static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
@@ -54,8 +56,7 @@ class UserMapper {
                     throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
                 }
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Could not insert user into database");
         }
         return user;
@@ -78,7 +79,7 @@ class UserMapper {
         }
     }
 
-    public static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
+    static List<User> getAll(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * FROM user";
 
@@ -87,13 +88,13 @@ class UserMapper {
 
                 ResultSet res = preparedStatement.executeQuery();
                 List<User> userList = new ArrayList<>();
-                while (res.next()){
+                while (res.next()) {
                     int userid = res.getInt("user_id");
                     String email = res.getString("email");
                     String password = res.getString("password");
                     String role = res.getString("role");
                     int wallet = res.getInt("wallet");
-                    User user = new User(userid,email,password,role,wallet);
+                    User user = new User(userid, email, password, role, wallet);
                     userList.add(user);
                 }
 
@@ -103,4 +104,26 @@ class UserMapper {
             throw new DatabaseException(throwables, throwables.getMessage());
         }
     }
+
+    static boolean editWallet(float wallet, int id, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        User user = null;
+        String sql = "UPDATE user SET wallet = ? WHERE user_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setFloat(1, wallet);
+                preparedStatement.setInt(2, id);
+                int rs = preparedStatement.executeUpdate();
+                if (rs == 1) {
+                    return true;
+                } else {
+                    throw new DatabaseException("Something went wrong");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, ex.getMessage());
+        }
+    }
 }
+
