@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shoppingcart</title>
+    <title>Shopping cart</title>
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     <!-- Bootstrap CSS -->
@@ -41,7 +41,7 @@
 
 
                         </div>
-                        <div class="card-body">
+                        <div class="card-body px-3">
                             <h5 class="card-title text-dark">Vanilla / Orange</h5>
                             <p class="card-text text-dark">Amount: 7</p>
                         </div>
@@ -50,12 +50,12 @@
                         <br>
                         <form action="shoppingCartServlet" method="post">
                             <input type="hidden" name="cupCakeId" value="1">
-                            <input type="submit" name="action" value="Remove">
+                            <input class="m-1" type="submit" name="action" value="Remove">
 
 
                         <form action="shoppingCartServlet" method="post">
                             <input type="hidden" name="cupCakeId" value="2">
-                            <input type="submit" name="action" value="Edit">
+                            <input class="m-1" type="submit" name="action" value="Edit">
                         </form>
                         </form>
 

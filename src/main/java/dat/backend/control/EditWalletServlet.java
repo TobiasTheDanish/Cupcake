@@ -23,9 +23,12 @@ public class EditWalletServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        User currentUser = (User) request.getSession().getAttribute("user");
         List<User> userList = null;
         try {
             userList = UserFacade.getAll(ApplicationStart.getConnectionPool());
+            User user = UserFacade.getUser(ApplicationStart.getConnectionPool(), currentUser.getId());
+            request.getSession().setAttribute("user", user);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", "ERROR: " + e.getMessage());
             request.getRequestDispatcher("WEB-INF/adminUserList.jsp").forward(request,response);
@@ -44,6 +47,8 @@ public class EditWalletServlet extends HttpServlet {
         }
         try {
             userList = UserFacade.getAll(ApplicationStart.getConnectionPool());
+            User user = UserFacade.getUser(ApplicationStart.getConnectionPool(), currentUser.getId());
+            request.getSession().setAttribute("user", user);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", "ERROR: " + e.getMessage());
             request.getRequestDispatcher("WEB-INF/adminUserList.jsp").forward(request,response);

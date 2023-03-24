@@ -8,34 +8,34 @@ public class User
     private String username;
     private String password;
     private String role;
-    private float currency;
+    private float wallet;
 
     public User(String username, String password, String role)
     {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.currency = 0.0f;
+        this.wallet = 0.0f;
     }
 
-    public User(int id, String username, String password, String role, float currency) {
+    public User(int id, String username, String password, String role, float wallet) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.currency = currency;
+        this.wallet = wallet;
     }
 
     public int getId() {
         return id;
     }
 
-    public float getCurrency() {
-        return currency;
+    public float getWallet() {
+        return wallet;
     }
 
-    public void setCurrency(float currency) {
-        this.currency = currency;
+    public void setWallet(float wallet) {
+        this.wallet = wallet;
     }
 
     public String getUsername()
@@ -91,6 +91,6 @@ public class User
                 ", Email: " + username +
                 ", Password: " + password +
                 ", Role: " + role +
-                ", Wallet: " + currency;
+                ", Wallet: " + wallet;
     }
 }

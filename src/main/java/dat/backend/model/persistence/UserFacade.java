@@ -28,4 +28,8 @@ public class UserFacade {
     public static boolean editWallet(float wallet, int id, ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.editWallet(wallet, id, connectionPool);
     }
+
+    public static User getUser(ConnectionPool connectionPool, int id) throws DatabaseException {
+        return UserMapper.getUser(id, connectionPool);
+    }
 }

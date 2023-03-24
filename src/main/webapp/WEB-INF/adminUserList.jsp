@@ -46,7 +46,7 @@
         <td>
             <form action="EditWalletServlet" method="post">
                 <label for="wallet">Edit wallet:</label><br>
-                <input type="text" id="wallet" name="wallet" value=${user.currency}><br>
+                <input type="text" id="wallet" name="wallet" value=${user.wallet}><br>
                 <input type="hidden" name="user_id" value="${user.id}">
                 <input class="mt-2" type="submit" value="Confirm">
             </form>

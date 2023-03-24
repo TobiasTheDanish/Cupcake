@@ -36,12 +36,12 @@
                     <div class="col-sm">
                         <div class="card border-dark mb-3" style="max-width: 18rem;">
                             <div class="card-header bg-transparent text-dark"><h5 class="card-title">Order ${order.id}</h5>
-                                <p class="card-subtitle text-secondary">Kunde: ${order.customer.username}</p>
+                                <p class="card-subtitle text-secondary">Customer: ${order.customer.username}</p>
 
                             </div>
-                            <div class="card-body">
+                            <div class="card-body px-3">
                                 <c:forEach var="item" items="${order.orderItems}">
-                                    <h5 class="card-title text-dark">${item.bottom.flavor}/${item.topping.flavor}</h5>
+                                    <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
                                     <p class="card-text text-dark">Amount: ${item.amount}</p>
                                 </c:forEach>
                             </div>
