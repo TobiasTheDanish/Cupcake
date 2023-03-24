@@ -45,7 +45,8 @@
             </select><br>
             <label for="amount">Amount:</label><br>
             <input id="amount" name="amount"><br>
-            <input type="submit" value="Bestil">
+            <br>
+            <input type="submit" value="Add to cart">
         </form>
 
         <c:if test="${sessionScope.shoppingcart != null}">
