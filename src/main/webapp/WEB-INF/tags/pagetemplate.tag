@@ -18,6 +18,7 @@
 </head>
 <body>
 <header>
+    <img src="${pageContext.request.contextPath}/images/cupcakeheader.png" class="img-fluid" alt="...">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container mt-1">
             <div class="row col">

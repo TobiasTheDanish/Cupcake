@@ -41,23 +41,21 @@
 
 
                         </div>
-                        <div class="card-body px-3">
+                        <div class="card-body">
                             <h5 class="card-title text-dark">Vanilla / Orange</h5>
                             <p class="card-text text-dark">Amount: 7</p>
                         </div>
                         <div class="card-footer bg-transparent text-dark">Price: 13 DKK</div>
                         <br>
                         <br>
+                        <div class="mx-3">
                         <form action="shoppingCartServlet" method="post">
                             <input type="hidden" name="cupCakeId" value="1">
-                            <input class="m-1" type="submit" name="action" value="Remove">
-
-
-                        <form action="shoppingCartServlet" method="post">
+                            <input type="submit" name="action" value="Remove">
                             <input type="hidden" name="cupCakeId" value="2">
-                            <input class="m-1" type="submit" name="action" value="Edit">
+                            <input type="submit" name="action" value="Edit">
                         </form>
-                        </form>
+                        </div>
 
                     </div>
 
@@ -70,20 +68,20 @@
 
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-dark">Chocolate / Strawberry</h5>
+                            <h5 class="card-title text-dark">Chocolate & Strawberry</h5>
                             <p class="card-text text-dark">Amount: 4</p>
                         </div>
                         <div class="card-footer bg-transparent text-dark">Price: 11 DKK</div>
                         <br>
                         <br>
-                        <form action="shoppingCartServlet" method="post">
-                            <input type="hidden" name="cupCakeId" value="2">
-                            <input type="submit" name="action" value="Remove">
+                        <div class="mx-3">
                             <form action="shoppingCartServlet" method="post">
+                                <input type="hidden" name="cupCakeId" value="1">
+                                <input type="submit" name="action" value="Remove">
                                 <input type="hidden" name="cupCakeId" value="2">
                                 <input type="submit" name="action" value="Edit">
                             </form>
-                        </form>
+                        </div>
 
 
 
