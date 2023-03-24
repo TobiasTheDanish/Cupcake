@@ -1,6 +1,5 @@
 package dat.backend.model.persistence;
 
-import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 class UserMapper {
     static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
@@ -124,6 +122,30 @@ class UserMapper {
         } catch (SQLException ex) {
             throw new DatabaseException(ex, ex.getMessage());
         }
+    }
+
+    static User getUser(int id, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT * FROM user WHERE user_id=?";
+
+        try (Connection connection = connectionPool.getConnection()){
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String email = rs.getString("email");
+                String pw = rs.getString("password");
+                String role = rs.getString("role");
+                int wallet = rs.getInt("wallet");
+
+                return new User(id, email, pw, role, wallet);
+            }
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables.getMessage());
+        }
+        return null;
     }
 }
 

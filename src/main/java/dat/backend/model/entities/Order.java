@@ -14,6 +14,12 @@ public class Order {
         orderItems = new ArrayList<>();
     }
 
+    public Order(int id, User customer) {
+        this.id = id;
+        this.customer = customer;
+        this.orderItems = new ArrayList<>();
+    }
+
     public Order(User customer, List<OrderItem> orderItems) {
         this.customer = customer;
         this.orderItems = orderItems;
@@ -35,6 +41,14 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    public float getPrice() {
+        float sum = 0.0f;
+        for (OrderItem orderItem : orderItems) {
+            sum += orderItem.getPrice();
+        }
+        return sum;
     }
 
     public void addItem(OrderItem item){
