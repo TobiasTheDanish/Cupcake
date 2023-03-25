@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: sanderroust
-  Date: 22/03/2023
-  Time: 11.11
+  User: thc19
+  Date: 25-03-2023
+  Time: 21:41
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,9 +11,7 @@
 <%@page errorPage="../error.jsp" isErrorPage="false" %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Orders for admin</title>
+    <title>Orders</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,11 +20,11 @@
 <body>
 <t:pagetemplate>
     <jsp:attribute name="header">
-         All orders
+         Your orders
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        All orders
+        Your orders
     </jsp:attribute>
 
     <jsp:body>
@@ -58,7 +56,6 @@
             </div>
         </div>
     </jsp:body>
-
 </t:pagetemplate>
 </body>
 </html>

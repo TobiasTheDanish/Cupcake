@@ -6,8 +6,6 @@ import dat.backend.model.exceptions.DatabaseException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OrderMapper {
     static List<Order> getAllOrders(ConnectionPool connectionPool) throws DatabaseException {
@@ -29,8 +27,43 @@ public class OrderMapper {
                 }
             }
 
-            for (Order order : orders) {
-                sql = "SELECT * FROM orderlinking WHERE order_id=?";
+            return getOrderItems(orders, connectionPool);
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex.getMessage());
+        }
+    }
+
+    static List<Order> getUserOrders(int user_id, ConnectionPool connectionPool) throws DatabaseException {
+        List<Order> orders = new ArrayList<>();
+
+        String sql = "SELECT * FROM orders WHERE user_id=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ps.setInt(1, user_id);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    int id = rs.getInt("order_id");
+                    User user = UserMapper.getUser(user_id, connectionPool);
+
+                    orders.add(new Order(id, user));
+                }
+            }
+
+            return getOrderItems(orders, connectionPool);
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables.getMessage());
+        }
+    }
+
+    private static List<Order> getOrderItems(List<Order> orders, ConnectionPool connectionPool) throws SQLException, DatabaseException {
+        String sql;
+        for (Order order : orders) {
+            sql = "SELECT * FROM orderlinking WHERE order_id=?";
+            try (Connection connection = connectionPool.getConnection()) {
                 try (PreparedStatement ps = connection.prepareStatement(sql)) {
                     ps.setInt(1, order.getId());
 
@@ -48,11 +81,9 @@ public class OrderMapper {
                     }
                 }
             }
-
-            return orders;
-        } catch (SQLException throwables) {
-            throw new DatabaseException(throwables.getMessage());
         }
+
+        return orders;
     }
 
     static Order createOrder(Order newOrder, ConnectionPool connectionPool) throws DatabaseException {

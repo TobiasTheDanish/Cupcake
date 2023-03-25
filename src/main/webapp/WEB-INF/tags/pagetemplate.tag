@@ -23,15 +23,15 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container mt-1">
-            <div class="row col">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="col-6 justify-content-start">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="row col justify-content-between collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="col-6">
                     <div class="navbar-nav">
                         <c:if test="${sessionScope.user != null}">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/OrderServlet">Orders</a>
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/OrderServlet">Orders</a>
                         </c:if>
                         <c:set var = "requiredRole" value="admin" scope="page"></c:set>
                         <c:if test="${sessionScope.user != null && sessionScope.user.role.equalsIgnoreCase(requiredRole)}">
@@ -39,8 +39,8 @@
                         </c:if>
                     </div>
                 </div>
-                <div class="col-6 collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                <div class="col-6">
+                    <div class="navbar-nav justify-content-end">
                         <c:if test="${sessionScope.user == null }">
                             <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                         </c:if>
@@ -55,15 +55,15 @@
                             </a>
                         </c:if>
                     </div>
-                </div>
+                </DIV>
             </div>
         </div>
     </nav>
 </header>
 
-<div id="body" class="container mt-4" style="min-height: 400px;">
-    <h1><jsp:invoke fragment="header"/></h1>
-    <jsp:doBody/>
+<div id="body" class="container-fluid: mt-4 mx-4" style="min-height: 400px;">
+        <h1><jsp:invoke fragment="header"/></h1>
+        <jsp:doBody/>
 </div>
 
 <!-- Footer -->
