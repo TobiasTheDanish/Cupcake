@@ -36,7 +36,6 @@ public class Register extends HttpServlet {
         try {
             UserFacade.createUser(email, password, confirmPassword, "user", connectionPool);
             request.setAttribute("password", password);
-            System.out.println(request.getMethod());
             request.getRequestDispatcher("/login").forward(request,response);
         } catch (DatabaseException e) {
             request.setAttribute("errormessage", e.getMessage());

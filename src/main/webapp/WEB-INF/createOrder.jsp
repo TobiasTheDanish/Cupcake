@@ -31,7 +31,7 @@
     <jsp:body>
         <h6>${requestScope.errormessage}</h6>
         <div class="container">
-        <form action="" method="post">
+        <form action="CreateOrderServlet" method="post">
             <div class="row justify-content-center">
                 <div class="col mx-auto">
             <label for="bottom-input">Bottom:</label><br>

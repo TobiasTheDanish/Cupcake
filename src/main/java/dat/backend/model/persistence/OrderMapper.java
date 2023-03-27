@@ -6,8 +6,6 @@ import dat.backend.model.exceptions.DatabaseException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OrderMapper {
     static List<Order> getAllOrders(ConnectionPool connectionPool) throws DatabaseException {
@@ -29,8 +27,43 @@ public class OrderMapper {
                 }
             }
 
-            for (Order order : orders) {
-                sql = "SELECT * FROM orderlinking WHERE order_id=?";
+            return getOrderItems(orders, connectionPool);
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex.getMessage());
+        }
+    }
+
+    static List<Order> getUserOrders(int user_id, ConnectionPool connectionPool) throws DatabaseException {
+        List<Order> orders = new ArrayList<>();
+
+        String sql = "SELECT * FROM orders WHERE user_id=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ps.setInt(1, user_id);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    int id = rs.getInt("order_id");
+                    User user = UserMapper.getUser(user_id, connectionPool);
+
+                    orders.add(new Order(id, user));
+                }
+            }
+
+            return getOrderItems(orders, connectionPool);
+        } catch (SQLException throwables) {
+            throw new DatabaseException(throwables.getMessage());
+        }
+    }
+
+    private static List<Order> getOrderItems(List<Order> orders, ConnectionPool connectionPool) throws SQLException, DatabaseException {
+        String sql;
+        for (Order order : orders) {
+            sql = "SELECT * FROM orderlinking WHERE order_id=?";
+            try (Connection connection = connectionPool.getConnection()) {
                 try (PreparedStatement ps = connection.prepareStatement(sql)) {
                     ps.setInt(1, order.getId());
 
@@ -48,55 +81,57 @@ public class OrderMapper {
                     }
                 }
             }
-
-            return orders;
-        } catch (SQLException throwables) {
-            throw new DatabaseException(throwables.getMessage());
         }
+
+        return orders;
     }
 
     static Order createOrder(Order newOrder, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "INSERT INTO orders (user_id) VALUES (?)";
-        int orderId = 0;
+        if (UserMapper.makeTransaction(newOrder.getCustomer(), newOrder.getPrice(), connectionPool)) {
+            String sql = "INSERT INTO orders (user_id) VALUES (?)";
+            int orderId = 0;
 
-        try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-                ps.setInt(1, newOrder.getCustomer().getId());
-
-                int rowsAffected = ps.executeUpdate();
-
-                if (rowsAffected == 0) {
-                    throw new DatabaseException("Error creating new order. 0 rows affected");
-                }
-
-                try (ResultSet keys = ps.getGeneratedKeys()) {
-                    if (keys.next()) {
-                        orderId = keys.getInt(1);
-                    } else {
-                        throw new DatabaseException("Adding order to database failed, no ID obtained");
-                    }
-                }
-            }
-
-            for (OrderItem item : newOrder.getOrderItems()) {
-                sql = "INSERT INTO orderlinking (order_id, topping_id, bottom_id, amount) VALUES (?, ?, ?, ?)";
-                try (PreparedStatement ps = connection.prepareStatement(sql, Statement.NO_GENERATED_KEYS)){
-                    ps.setInt(1, orderId);
-                    ps.setInt(2, item.getTopping().getId());
-                    ps.setInt(3, item.getBottom().getId());
-                    ps.setInt(4, item.getAmount());
+            try (Connection connection = connectionPool.getConnection()) {
+                try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setInt(1, newOrder.getCustomer().getId());
 
                     int rowsAffected = ps.executeUpdate();
+
                     if (rowsAffected == 0) {
-                        throw new DatabaseException("Failure adding order item to orderlinking table");
+                        throw new DatabaseException("Error creating new order. 0 rows affected");
+                    }
+
+                    try (ResultSet keys = ps.getGeneratedKeys()) {
+                        if (keys.next()) {
+                            orderId = keys.getInt(1);
+                        } else {
+                            throw new DatabaseException("Adding order to database failed, no ID obtained");
+                        }
                     }
                 }
-            }
 
-            return new Order(orderId, newOrder.getCustomer(), newOrder.getOrderItems());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw new DatabaseException(throwables.getMessage());
+                for (OrderItem item : newOrder.getOrderItems()) {
+                    sql = "INSERT INTO orderlinking (order_id, topping_id, bottom_id, amount) VALUES (?, ?, ?, ?)";
+                    try (PreparedStatement ps = connection.prepareStatement(sql, Statement.NO_GENERATED_KEYS)) {
+                        ps.setInt(1, orderId);
+                        ps.setInt(2, item.getTopping().getId());
+                        ps.setInt(3, item.getBottom().getId());
+                        ps.setInt(4, item.getAmount());
+
+                        int rowsAffected = ps.executeUpdate();
+                        if (rowsAffected == 0) {
+                            throw new DatabaseException("Failure adding order item to orderlinking table");
+                        }
+                    }
+                }
+
+                return new Order(orderId, newOrder.getCustomer(), newOrder.getOrderItems());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                throw new DatabaseException(throwables.getMessage());
+            }
+        } else {
+            throw new DatabaseException("Insufficient funds!");
         }
     }
 

@@ -32,4 +32,8 @@ public class UserFacade {
     public static User getUser(ConnectionPool connectionPool, int id) throws DatabaseException {
         return UserMapper.getUser(id, connectionPool);
     }
+
+    public static boolean makeTransaction(User user, float price, ConnectionPool connectionPool) throws DatabaseException {
+        return UserMapper.makeTransaction(user, price, connectionPool);
+    }
 }
