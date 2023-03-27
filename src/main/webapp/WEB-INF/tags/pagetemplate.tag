@@ -35,7 +35,7 @@
                         </c:if>
                         <c:set var = "requiredRole" value="admin" scope="page"></c:set>
                         <c:if test="${sessionScope.user != null && sessionScope.user.role.equalsIgnoreCase(requiredRole)}">
-                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Customers</a>
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/AdminServlet">Admin</a>
                         </c:if>
                     </div>
                 </div>
