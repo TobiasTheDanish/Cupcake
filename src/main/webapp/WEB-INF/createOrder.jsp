@@ -30,7 +30,7 @@
 
     <jsp:body>
         <h6>${requestScope.errormessage}</h6>
-        <div class="container">
+        <div class="container" style="display: flex; justify-content: center">
         <form action="CreateOrderServlet" method="post">
             <div class="row justify-content-center">
                 <div class="col mx-auto">
@@ -57,8 +57,8 @@
                 </div>
             <br>
             </div>
-            <div class="row" style="margin-left: 1px">
-            <input style="background: #F2ECEB; color: #3c1460; width: 11em; margin-top: 4em; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
+            <div class="row justify-content-center" style="margin-left: 1px">
+            <input style="background: #F2ECEB; color: #3c1460; width: 195px; margin-top: 4em; margin-right: 20px; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
             </div>
         </form>
         </div>

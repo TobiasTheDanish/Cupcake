@@ -5,7 +5,6 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -14,16 +13,8 @@
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
-
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-        </c:if>
-
-        <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
-        </c:if>
+    <h1 style="color: #3c1460; font-size: xxx-large; text-align: center">Maybe the best <br> cupcakes in the world.</h1>
+    <h3 style="color: #3c1460; font-size: large; text-align: center">Make your first order today!</h3>
 
     </jsp:body>
 
