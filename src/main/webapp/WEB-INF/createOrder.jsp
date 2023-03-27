@@ -30,7 +30,7 @@
 
     <jsp:body>
         <h6>${requestScope.errormessage}</h6>
-        <form action="" method="post">
+        <form action="CreateOrderServlet" method="post">
             <label for="bottom-input">Bottom:</label><br>
             <select id="bottom-input" name="bottom">
                 <c:forEach var="bottom" items="${requestScope.bottoms}">

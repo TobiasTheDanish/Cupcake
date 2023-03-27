@@ -38,26 +38,29 @@
                 <div class="col-sm">
                     <div class="card border-dark mb-3" style="max-width: 18rem;">
                             <div class="card-header bg-transparent text-dark"><h5 class="card-title"> Shopping Cart</h5>
-                                <p class="card-subtitle text-secondary">Kunde: ${requestScope.order.customer.username}</p>
+                                <p class="card-subtitle text-secondary">Kunde: ${requestScope.shoppingcart.customer.username}</p>
 
                                 </div>
                                 <div class="card-body">
-                                    <c:forEach var="item" items="${requestScope.order.orderItems}">
+                                    <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
                                         <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
                                         <p class="card-text text-dark">Amount: ${item.amount}</p>
                                         <form action="shoppingCartServlet" method="post">
-                                            <input type="hidden" name="cupCakeId" value="1">
-                                            <input type="submit" name="action" value="Remove">
+                                            <input type="hidden" name="orderItemId" value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
+                                            <input type="hidden" name="action" value="Remove">
+                                            <input type="submit" value="Remove">
 
+                                            </form>
 
                                             <form action="shoppingCartServlet" method="post">
-                                                <input type="hidden" name="cupCakeId" value="2">
-                                                <input type="submit" name="action" value="Edit">
-                                            </form>
+                                                <input type="hidden" name="orderItemId" value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
+                                                <input type="hidden" name="action" value="Edit">
+                                                <input type="submit" value="Edit">
+                                                
                                         </form>
                                     </c:forEach>
                                 </div>
-                                <div class="card-footer bg-transparent text-dark">Price: ${requestScope.order.price} DKK</div>
+                                <div class="card-footer bg-transparent text-dark">Price: ${requestScope.shoppingcart.price} DKK</div>
                                 <form action="CheckoutServlet" method="post">
                                     <input type="submit" value="Checkout">
                                 </form>
@@ -69,7 +72,7 @@
 
                 </div>
 
-            </div>
+
 
         <br>
         <br>
