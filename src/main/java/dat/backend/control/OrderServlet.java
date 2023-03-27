@@ -25,7 +25,16 @@ public class OrderServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/adminOrders.jsp").forward(request, response);
             } catch (DatabaseException e) {
                 request.setAttribute("message", e.getMessage());
-                request.getRequestDispatcher("WEB-INF/checkout.jsp").forward(request, response);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        } else if (user.getRole().equalsIgnoreCase("user")) {
+            try {
+                List<Order> userOrders = OrderFacade.getUserOrders(user.getId(), ApplicationStart.getConnectionPool());
+                request.setAttribute("orders", userOrders);
+                request.getRequestDispatcher("WEB-INF/userOrders.jsp").forward(request, response);
+            } catch (DatabaseException e) {
+                request.setAttribute("message", e.getMessage());
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
     }
