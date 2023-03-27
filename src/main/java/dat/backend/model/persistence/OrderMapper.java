@@ -140,7 +140,7 @@ public class OrderMapper {
         String sql = "SELECT * FROM bottoms";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet res = ps.executeQuery();
 
                 while (res.next()) {
@@ -166,7 +166,7 @@ public class OrderMapper {
         String sql = "SELECT * FROM toppings";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet res = ps.executeQuery();
 
                 while (res.next()) {
@@ -191,7 +191,7 @@ public class OrderMapper {
         String sql = "SELECT * FROM bottoms WHERE bottom_id=?";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, bottomId);
 
                 ResultSet res = ps.executeQuery();
@@ -216,18 +216,18 @@ public class OrderMapper {
         String sql = "SELECT * FROM toppings WHERE topping_id=?";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, toppingId);
 
                 ResultSet res = ps.executeQuery();
 
                 res.next();
 
-                    int id = res.getInt("topping_id");
-                    String flavor = res.getString("flavor");
-                    float price = res.getFloat("price");
+                int id = res.getInt("topping_id");
+                String flavor = res.getString("flavor");
+                float price = res.getFloat("price");
 
-                    return new Topping(id, flavor, price);
+                return new Topping(id, flavor, price);
 
             } catch (SQLException throwables) {
                 throw new DatabaseException(throwables.getMessage());
@@ -236,4 +236,36 @@ public class OrderMapper {
             throw new DatabaseException(throwables.getMessage());
         }
     }
+
+    static void deleteOrder(int currentOrder, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "DELETE FROM orderLinking WHERE order_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, currentOrder);
+
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected == 0) {
+                    throw new DatabaseException("Error deleting order. 0 rows affected");
+                }
+            }
+            sql = "DELETE FROM orders WHERE order_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, currentOrder);
+
+                int rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected == 0) {
+                    throw new DatabaseException("Error deleting order. 0 rows affected");
+                }
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new DatabaseException(throwables.getMessage());
+        }
+    }
 }
+

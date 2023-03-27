@@ -58,7 +58,12 @@
                                 </c:forEach>
                             </ul>
                         </div>
-                        <div class="card-footer bg-transparent text-dark">Total price: ${order.price} DKK</div>
+                        <div class="card-footer bg-transparent text-dark">Total price: ${order.price} DKK
+                            <form action="AdminViewOrdersServlet" method="post">
+                                <input type="hidden" name="orderId" value="${order.id}">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </div>
                     </div>
                 </c:forEach>
             </div>
