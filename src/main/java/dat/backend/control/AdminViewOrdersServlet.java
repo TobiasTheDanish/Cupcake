@@ -18,7 +18,6 @@ public class AdminViewOrdersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
             try {
                 List<Order> orders = OrderFacade.getAllOrders(ApplicationStart.getConnectionPool());
                 request.setAttribute("orders", orders);
@@ -32,5 +31,13 @@ public class AdminViewOrdersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int id = Integer.parseInt(request.getParameter("orderId"));
+        try {
+            OrderFacade.deleteOrder(id, ApplicationStart.getConnectionPool());
+            doGet(request,response);
+        } catch (DatabaseException e) {
+            request.setAttribute("message", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 }

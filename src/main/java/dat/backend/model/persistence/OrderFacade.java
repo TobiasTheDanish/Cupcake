@@ -35,4 +35,8 @@ public class OrderFacade {
     public static List<Topping> getAllToppings(ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getAllToppings(connectionPool);
     }
+
+    public static void deleteOrder(int currentOrder, ConnectionPool connectionPool) throws DatabaseException {
+        OrderMapper.deleteOrder(currentOrder,connectionPool);
+    }
 }
