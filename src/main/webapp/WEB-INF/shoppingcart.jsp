@@ -42,6 +42,10 @@
 
                                 </div>
                                 <div class="card-body" style="background: #F2ECEB">
+                                    <c:if test="${requestScope.shoppingcart.orderItems.size() == 0}">
+                                        <h5 class="card-title text-dark">Your shopping cart looks empty</h5>
+                                        <p class="card-text text-dark">Add some cupcakes <a href="CreateOrderServlet">here</a></p>
+                                    </c:if>
                                     <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
                                         <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
                                         <p class="card-text text-dark">Amount: ${item.amount}</p>

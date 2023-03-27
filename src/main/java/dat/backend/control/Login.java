@@ -1,8 +1,11 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Bottom;
+import dat.backend.model.entities.Topping;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.services.ShoppingCart;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "login", urlPatterns = {"/login"} )
 public class Login extends HttpServlet
@@ -47,7 +51,12 @@ public class Login extends HttpServlet
             session.setAttribute("user", user); // adding user object to session scope
 
             ShoppingCart.initCurrentOrder(user);
-            request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+
+            List<Bottom> bottoms = OrderFacade.getAllBottoms(connectionPool);
+            List<Topping> toppings = OrderFacade.getAllToppings(connectionPool);
+            request.setAttribute("bottoms", bottoms);
+            request.setAttribute("toppings", toppings);
+            request.getRequestDispatcher("WEB-INF/createOrder.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
