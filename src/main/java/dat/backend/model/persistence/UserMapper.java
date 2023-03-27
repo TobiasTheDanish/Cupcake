@@ -147,5 +147,25 @@ class UserMapper {
         }
         return null;
     }
+
+    static boolean makeTransaction(User user, float price, ConnectionPool connectionPool) throws DatabaseException {
+        if (price <= user.getWallet()) {
+            String sql = "UPDATE user SET wallet=? WHERE user_id=?";
+
+            try (Connection connection = connectionPool.getConnection()) {
+                PreparedStatement ps = connection.prepareStatement(sql);
+
+                float newWallet = user.getWallet() - price;
+                ps.setFloat(1, newWallet);
+                ps.setInt(2, user.getId());
+
+                int rowsAffected = ps.executeUpdate();
+                return rowsAffected >= 1;
+            } catch (SQLException throwables) {
+                throw new DatabaseException(throwables.getMessage());
+            }
+        }
+        return false;
+    }
 }
 

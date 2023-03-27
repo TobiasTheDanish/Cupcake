@@ -2,8 +2,10 @@ package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Order;
+import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.OrderFacade;
+import dat.backend.model.persistence.UserFacade;
 import dat.backend.model.services.ShoppingCart;
 
 import javax.servlet.*;
@@ -24,6 +26,8 @@ public class CheckoutServlet extends HttpServlet {
 
         try {
             OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
+
+            request.getSession().setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             ShoppingCart.clear();
             request.getSession().setAttribute("shoppingcart", null);
