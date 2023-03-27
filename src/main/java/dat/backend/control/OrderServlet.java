@@ -18,16 +18,7 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user.getRole().equalsIgnoreCase("admin")){
-            try {
-                List<Order> orders = OrderFacade.getAllOrders(ApplicationStart.getConnectionPool());
-                request.setAttribute("orders", orders);
-                request.getRequestDispatcher("WEB-INF/adminOrders.jsp").forward(request, response);
-            } catch (DatabaseException e) {
-                request.setAttribute("message", e.getMessage());
-                request.getRequestDispatcher("error.jsp").forward(request, response);
-            }
-        } else if (user.getRole().equalsIgnoreCase("user")) {
+
             try {
                 List<Order> userOrders = OrderFacade.getUserOrders(user.getId(), ApplicationStart.getConnectionPool());
                 request.setAttribute("orders", userOrders);
@@ -37,10 +28,11 @@ public class OrderServlet extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }
+
