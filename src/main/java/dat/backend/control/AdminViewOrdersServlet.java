@@ -12,27 +12,25 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "OrderServlet", value = "/OrderServlet")
-public class OrderServlet extends HttpServlet {
+@WebServlet(name = "AdminViewOrdersServlet", value = "/AdminViewOrdersServlet")
+public class AdminViewOrdersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
             try {
-                List<Order> userOrders = OrderFacade.getUserOrders(user.getId(), ApplicationStart.getConnectionPool());
-                request.setAttribute("orders", userOrders);
-                request.getRequestDispatcher("WEB-INF/userOrders.jsp").forward(request, response);
+                List<Order> orders = OrderFacade.getAllOrders(ApplicationStart.getConnectionPool());
+                request.setAttribute("orders", orders);
+                request.getRequestDispatcher("WEB-INF/adminOrders.jsp").forward(request, response);
             } catch (DatabaseException e) {
                 request.setAttribute("message", e.getMessage());
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-        }
-
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }
-

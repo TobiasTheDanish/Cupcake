@@ -29,6 +29,11 @@
     <form action="AdminUserListServlet">
         <input type="submit" value="User List">
     </form>
+    <br>
+    View All Orders:
+    <form action="AdminViewOrdersServlet">
+        <input type="submit" value="Orders">
+    </form>
     </jsp:body>
     </t:pagetemplate>
 

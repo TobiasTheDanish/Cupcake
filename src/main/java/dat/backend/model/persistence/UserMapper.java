@@ -41,12 +41,13 @@ class UserMapper {
     static User createUser(String email, String password, String role, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String sql = "insert into user (email, password, role) values (?,?,?)";
+        String sql = "insert into user (email, password, role, wallet) values (?,?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ps.setString(3, role);
+                ps.setFloat(4, 0);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
                     user = new User(email, password, role);
@@ -146,6 +147,26 @@ class UserMapper {
             throw new DatabaseException(throwables.getMessage());
         }
         return null;
+    }
+
+    static boolean makeTransaction(User user, float price, ConnectionPool connectionPool) throws DatabaseException {
+        if (price <= user.getWallet()) {
+            String sql = "UPDATE user SET wallet=? WHERE user_id=?";
+
+            try (Connection connection = connectionPool.getConnection()) {
+                PreparedStatement ps = connection.prepareStatement(sql);
+
+                float newWallet = user.getWallet() - price;
+                ps.setFloat(1, newWallet);
+                ps.setInt(2, user.getId());
+
+                int rowsAffected = ps.executeUpdate();
+                return rowsAffected >= 1;
+            } catch (SQLException throwables) {
+                throw new DatabaseException(throwables.getMessage());
+            }
+        }
+        return false;
     }
 }
 
