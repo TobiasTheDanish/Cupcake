@@ -71,15 +71,9 @@
                     </div>
 
                 </div>
-
-
-
         <br>
         <br>
         <br>
-        <form action="shoppingCartServlet" method="post">
-            <input type="submit" value="Order">
-        </form>
     </jsp:body>
 
 </t:pagetemplate>
