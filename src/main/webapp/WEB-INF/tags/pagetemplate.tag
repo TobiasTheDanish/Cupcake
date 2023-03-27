@@ -49,7 +49,7 @@
                 <div class="col-6">
                     <div class="navbar-nav">
                         <c:if test="${sessionScope.user != null}">
-                            <a class="nav-item nav-link cc-purple" href="${pageContext.request.contextPath}/OrderServlet">Orders</a>
+                            <a class="nav-item nav-link cc-purple" href="${pageContext.request.contextPath}/OrderServlet">My orders</a>
                         </c:if>
                         <c:set var = "requiredRole" value="admin" scope="page"></c:set>
                         <c:if test="${sessionScope.user != null && sessionScope.user.role.equalsIgnoreCase(requiredRole)}">
@@ -80,8 +80,12 @@
 </header>
 
 <div id="body" class="container-fluid: mt-4 mx-4" style="min-height: 400px;">
-        <h1><jsp:invoke fragment="header"/></h1>
+    <div class="row" style="text-align: center">
+        <h1 style="color: #3c1460"><jsp:invoke fragment="header"/></h1>
+    </div>
+    <div class="row justify-content-center mx-auto">
         <jsp:doBody/>
+    </div>
 </div>
 
 <!-- Footer -->

@@ -13,24 +13,20 @@
     </jsp:attribute>
 
     <jsp:body>
-
-        <p>You should be logged in now</p>
-
+        <div class="col-lg-3 justify-content-center">
         <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
+            <p style="text-align: center">You are logged in with the role of "${sessionScope.user.role}".</p>
 
             <form action="CreateOrderServlet" method="get">
-                <input type="submit" value="Create Order Here">
+                <input style="margin-left: 120px" type="submit" value="Create Order Here">
             </form>
         </c:if>
-
-
 
         <c:if test="${sessionScope.user == null}">
             <p>You are not logged in yet. You can do it here: <a
                     href="../login.jsp">Login</a></p>
         </c:if>
-
+        </div>
     </jsp:body>
 
 </t:pagetemplate>

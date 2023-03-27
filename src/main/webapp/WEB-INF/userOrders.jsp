@@ -31,16 +31,16 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <c:forEach var="order" items="${requestScope.orders}">
-                    <div class="card border-dark m-4" style="max-width: 18rem;">
+                    <div class="card border-dark m-4" style="background: #F2ECEB; max-width: 18rem;">
                         <div class="card-header bg-transparent text-dark">
-                            <h5 class="card-title">Order ${order.id}</h5>
+                            <h5 class="card-title" style="color: #3c1460">Order ${order.id}</h5>
                             <p class="card-subtitle text-secondary">Customer: ${order.customer.username}</p>
 
                         </div>
-                        <div class="card-body px-0 py-1">
-                            <ul class="list-group list-group-flush">
+                        <div class="card-body bg-transparent px-0 py-1">
+                            <ul class="bg-transparent list-group list-group-flush">
                                 <c:forEach var="item" items="${order.orderItems}">
-                                    <li class="list-group-item">
+                                    <li class="bg-transparent list-group-item">
                                         <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
                                         <div style="display: flex; justify-content: space-between;">
                                             <p class="card-text text-dark mb-0">Amount: ${item.amount}</p>

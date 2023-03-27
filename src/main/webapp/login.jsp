@@ -14,24 +14,25 @@
     </jsp:attribute>
 
     <jsp:body>
-
+        <div class="col-lg-3 justify-content-center">
         <table>
             <h6>${requestScope.errormessage}</h6>
-            <form action="login" method="post">
+            <form style="border: 2px solid #3c1460" action="login" method="post">
                 <tr>
-                    <td><label for="email">Email: </label></td>
-                    <td><input type="email" id="email" name="email"/></td>
+                    <td><label style="color: #3c1460" for="email">Email: </label></td>
+                    <td><input style="background: #F2ECEB; border: 2px solid #3c1460" type="email" id="email" name="email"/></td>
                 </tr>
                 <tr>
-                    <td><label for="password">Password: </label></td>
-                    <td><input type="password" id="password" name="password"/></td>
+                    <td><label style="color: #3c1460" for="password">Password: </label></td>
+                    <td><input style="background: #F2ECEB; border: 2px solid #3c1460" type="password" id="password" name="password"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Log in"/></td>
+                    <td><input style="background: #F2ECEB; border: 2px solid #3c1460; color: #3c1460" type="submit" value="Log in"/></td>
                 </tr>
             </form>
         </table>
-        <p>Not already registered? <a href="registration.jsp">Register here</a></p>
+        <p>Not already registered? <a style="color: #3c1460" href="registration.jsp">Register here</a></p>
+        </div>
 
     </jsp:body>
 </t:pagetemplate>
