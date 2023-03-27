@@ -21,10 +21,10 @@
         padding: 8px;
     }
 
-    tr:nth-child(even) {
+    tr:nth-child(odd) {
         background-color: #C6D2ED;
     }
-    tr:nth-child(odd) {
+    tr:nth-child(even) {
         background-color: #F2ECEB;
     }
 </style>

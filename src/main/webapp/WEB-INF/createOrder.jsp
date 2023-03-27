@@ -30,27 +30,43 @@
 
     <jsp:body>
         <h6>${requestScope.errormessage}</h6>
+        <div class="container">
         <form action="" method="post">
+            <div class="row justify-content-center">
+                <div class="col mx-auto">
             <label for="bottom-input">Bottom:</label><br>
-            <select id="bottom-input" name="bottom">
+            <select class="p-1" style="background: #F2ECEB; color: #3c1460; border-radius: 10px; border: solid 2px #3c1460" id="bottom-input" name="bottom">
                 <c:forEach var="bottom" items="${requestScope.bottoms}">
                     <option value="${bottom.id}">${bottom.flavor} : ${bottom.price} DKK</option>
                 </c:forEach>
             </select><br>
+                </div>
+
+                <div class="col mx-auto">
             <label for="topping-input">Topping:</label><br>
-            <select id="topping-input" name="topping">
+            <select class="p-1" style="background: #F2ECEB; color: #3c1460; border-radius: 10px; border: solid 2px #3c1460" id="topping-input" name="topping">
                 <c:forEach var="topping" items="${requestScope.toppings}">
                     <option value="${topping.id}">${topping.flavor} : ${topping.price} DKK</option>
                 </c:forEach>
             </select><br>
+                </div>
+
+                <div class="col mx-auto">
             <label for="amount">Amount:</label><br>
-            <input id="amount" name="amount"><br>
+            <input style="background: #F2ECEB; color: #3c1460; border-radius: 10px; border: solid 2px #3c1460" id="amount" name="amount"><br>
+                </div>
             <br>
-            <input type="submit" value="Add to cart">
+            </div>
+            <div class="row" style="margin-left: 1px">
+            <input style="background: #F2ECEB; color: #3c1460; width: 11em; margin-top: 4em; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
+            </div>
         </form>
+        </div>
+                <div style="display: flex; justify-content: center">
+                </div>
 
         <c:if test="${sessionScope.shoppingcart != null}">
-            <h6>Shoppingcart</h6>
+            <h6>Shopping cart</h6>
             <table style="border: 1px solid grey">
                 <tr style="border-bottom: 1px solid grey">
                     <th style="border-right: 1px solid grey">Bottom</th>
