@@ -14,35 +14,38 @@
     </jsp:attribute>
 
     <jsp:body>
+        <div class="container justify-content-center" style="display: flex;">
+
         <table>
             <h6>${requestScope.errormessage}</h6>
             <form action="Register" method="post">
                 <tr>
-                    <td><label for="username">Email: </label></td>
-                    <td><input type="email" id="username" name="email" value="${requestScope.email}"/></td>
+                    <td><label style="color: #3c1460" for="username">Email: </label></td>
+                    <td><input style="background: #F2ECEB; border: 2px solid #3c1460" type="email" id="username" name="email" value="${requestScope.email}"/></td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="password">Password: </label>
+                        <label style="color: #3c1460" for="password">Password: </label>
                     </td>
                     <td>
-                        <input type="password" id="password" name="password"/>
+                        <input style="background: #F2ECEB; border: 2px solid #3c1460" type="password" id="password" name="password"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="confirmPassword">Confirm<br> password: </label>
+                        <label style="color: #3c1460" for="confirmPassword">Confirm<br> password: </label>
                     </td>
                     <td>
-                        <br><input type="password" id="confirmPassword" name="confirmPassword"/>
+                        <br><input style="background: #F2ECEB; border: 2px solid #3c1460" type="password" id="confirmPassword" name="confirmPassword"/>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Register"/></td>
+                    <td><input style="background: #3c1460; color: #F2ECEB; border-radius: 20px; border: none; padding: 5px 15px;" type="submit" value="Register"/></td>
                 </tr>
             </form>
         </table>
-        <p>Already registered? <a href="login.jsp">Log in here</a></p>
+        </div>
+        <p style="text-align: center;">Already registered? <a style="color: #3c1460;" href="login.jsp">Log in here</a></p>
 
     </jsp:body>
 </t:pagetemplate>

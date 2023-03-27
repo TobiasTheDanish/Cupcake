@@ -14,7 +14,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div class="col-lg-3 justify-content-center">
+        <div class="container justify-content-center" style="display: flex">
         <table>
             <h6>${requestScope.errormessage}</h6>
             <form style="border: 2px solid #3c1460" action="login" method="post">
@@ -27,12 +27,12 @@
                     <td><input style="background: #F2ECEB; border: 2px solid #3c1460" type="password" id="password" name="password"/></td>
                 </tr>
                 <tr>
-                    <td><input style="background: #F2ECEB; border: 2px solid #3c1460; color: #3c1460" type="submit" value="Log in"/></td>
+                    <td><input style="background: #3c1460; color: #F2ECEB; border-radius: 20px; border: none; padding: 5px 15px;" type="submit" value="Log in"/></td>
                 </tr>
             </form>
         </table>
-        <p>Not already registered? <a style="color: #3c1460" href="registration.jsp">Register here</a></p>
         </div>
+        <p style="text-align: center;">Not already registered? <a style="color: #3c1460" href="registration.jsp">Register here</a></p>
 
     </jsp:body>
 </t:pagetemplate>

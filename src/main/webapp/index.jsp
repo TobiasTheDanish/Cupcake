@@ -22,9 +22,10 @@
         <img style="width: 320px; height: 400px" src="images/cupcakelogo1.png">
             </div>
             <div class="col-2">
-            <button style="background: #3c1460;margin-top: 50px; width: 120px; height: 35px; border: 2px solid #3c1460; border-radius: 20px" id="button__back" onclick="">
-                <p style="color: #F2ECEB; margin: auto;">Log in</p>
-            </button>
+            <form action="login.jsp">
+            <input type="submit" value="Log in" style="background: #3c1460; color: #F2ECEB; margin-top: 50px; width: 120px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
+            </input>
+            </form>
             </div>
             <div class="col">
         <img style="width: 320px; height: 400px" src="images/cupcakelogo2.png">
