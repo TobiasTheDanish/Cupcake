@@ -26,4 +26,16 @@ public class OrderItem {
     public float getPrice() {
         return (bottom.getPrice() + topping.getPrice()) * amount;
     }
+
+    public void setBottom(Bottom bottom) {
+        this.bottom = bottom;
+    }
+
+    public void setTopping(Topping topping) {
+        this.topping = topping;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
