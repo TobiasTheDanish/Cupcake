@@ -18,7 +18,7 @@
             <p style="text-align: center">You are logged in with the role of "${sessionScope.user.role}".</p>
 
             <form action="CreateOrderServlet" method="get">
-                <input style="background: #F2ECEB; border: 2px solid #3c1460; color: #3c1460; margin-left: 120px" type="submit" value="Create Order Here">
+                <input style="background: #3c1460; color: #F2ECEB; border-radius: 20px; border: none; padding: 5px 15px; margin-left: 120px" type="submit" value="Create Order Here">
             </form>
         </c:if>
 

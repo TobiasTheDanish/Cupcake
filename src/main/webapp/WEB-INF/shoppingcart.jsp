@@ -33,15 +33,15 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div class="container-fluid">
+        <div class="container-fluid" style="display: flex; justify-content: center;">
             <div class="row">
                 <div class="col-sm">
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                            <div class="card-header bg-transparent text-dark"><h5 class="card-title"> Shopping Cart</h5>
+                    <div class="card border-dark mb-3" style="background: #F2ECEB; max-width: 18rem;">
+                            <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title"> Shopping Cart</h5>
                                 <p class="card-subtitle text-secondary">Kunde: ${requestScope.shoppingcart.customer.username}</p>
 
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="background: #F2ECEB">
                                     <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
                                         <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
                                         <p class="card-text text-dark">Amount: ${item.amount}</p>
@@ -60,8 +60,8 @@
                                         </form>
                                     </c:forEach>
                                 </div>
-                                <div class="card-footer bg-transparent text-dark">Price: ${requestScope.shoppingcart.price} DKK</div>
-                                <form action="CheckoutServlet" method="post">
+                                <div class="card-footer text-dark" style="background: #F2ECEB; text-align: center">Price: ${requestScope.shoppingcart.price} DKK</div>
+                                <form action="CheckoutServlet" method="post" style="display: flex; justify-content: center">
                                     <input type="submit" value="Checkout">
                                 </form>
                             </div>
