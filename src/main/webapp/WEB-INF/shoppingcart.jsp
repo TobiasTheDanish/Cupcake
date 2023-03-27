@@ -25,11 +25,11 @@
 <body>
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Your Shopping-cart
+         Shopping cart
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Shopping-cart
+        Shopping cart
     </jsp:attribute>
 
     <jsp:body>
