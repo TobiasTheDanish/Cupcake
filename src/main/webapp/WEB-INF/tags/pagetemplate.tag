@@ -18,6 +18,9 @@
 </head>
 <body>
 <header>
+    <div style="background: #3c1460; display: flex; justify-content: center; padding: 10px;">
+    <img src="${pageContext.request.contextPath}/images/cupcakeimageClose.png" class="img-fluid" alt="...">
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container mt-1">
             <div class="row col">
