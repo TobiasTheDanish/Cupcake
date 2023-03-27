@@ -94,13 +94,10 @@
 
             </div>
 
-        </div>
-
-
+                </div>
         <br>
         <br>
         <br>
-
     </jsp:body>
 
 </t:pagetemplate>

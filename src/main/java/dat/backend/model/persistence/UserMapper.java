@@ -106,7 +106,6 @@ class UserMapper {
 
     static boolean editWallet(float wallet, int id, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
-        User user = null;
         String sql = "UPDATE user SET wallet = ? WHERE user_id = ?";
 
         try (Connection connection = connectionPool.getConnection()) {

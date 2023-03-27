@@ -16,13 +16,16 @@
     }
 
     td, th {
-        border: 1px solid #dddddd;
+        border: 3px solid #F2ECEB;
         text-align: left;
         padding: 8px;
     }
 
+    tr:nth-child(odd) {
+        background-color: #C6D2ED;
+    }
     tr:nth-child(even) {
-        background-color: #dddddd;
+        background-color: #F2ECEB;
     }
 </style>
 <t:pagetemplate>
@@ -35,6 +38,10 @@
     </jsp:attribute>
 
     <jsp:body>
+        <div class="row justify-content-center">
+            <button style="background: #F2ECEB; width: 120px; height: 35px; border: 2px solid #3c1460" id="button__back" onclick="window.history.back();">
+                <p style="color: #3c1460; margin: auto;">Go back</p>
+        </div>
 <h6>${requestScope.errormessage}</h6>
 <table>
     <tr>
