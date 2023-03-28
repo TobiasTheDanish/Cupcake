@@ -105,9 +105,7 @@
             <div class="card-footer text-dark" style="background: #F2ECEB; text-align: center">
                 Price: ${requestScope.shoppingcart.price} DKK
             </div>
-            <form action="CheckoutServlet" method="post" style="display: flex; justify-content: center">
-                <input type="submit" value="Checkout">
-            </form>
+
         </div>
 
 
