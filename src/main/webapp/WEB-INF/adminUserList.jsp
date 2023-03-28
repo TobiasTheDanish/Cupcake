@@ -41,6 +41,7 @@
         <div class="row justify-content-center">
             <button style="background: #F2ECEB; width: 120px; height: 35px; border: 2px solid #3c1460" id="button__back" onclick="window.history.back();">
                 <p style="color: #3c1460; margin: auto;">Go back</p>
+            </button>
         </div>
 <h6>${requestScope.errormessage}</h6>
 <table>

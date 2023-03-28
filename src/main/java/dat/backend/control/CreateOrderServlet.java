@@ -43,7 +43,6 @@ public class CreateOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             int bottomId = Integer.parseInt(request.getParameter("bottom"));
             int toppingId = Integer.parseInt(request.getParameter("topping"));

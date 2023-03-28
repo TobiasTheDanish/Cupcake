@@ -32,14 +32,26 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div class="container-fluid">
+        <div class="container-fluid" style="display: flex; justify-content: center;">
             <div class="row">
                 <div class="col-sm">
-                    <div class="card border-dark mb-3" style="max-width: 18rem;">
-                        <div class="card-header bg-transparent text-dark"><h5 class="card-title"> Shopping Cart</h5>
-                            <p class="card-subtitle text-secondary">
-                                Kunde: ${requestScope.shoppingcart.customer.username}</p>
+                    <div class="card border-dark mb-3" style="background: #F2ECEB; max-width: 18rem;">
+                            <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title"> Shopping Cart</h5>
+                                <p class="card-subtitle text-secondary">Kunde: ${requestScope.shoppingcart.customer.username}</p>
 
+                                </div>
+                                <div class="card-body" style="background: #F2ECEB">
+                                    <c:if test="${requestScope.shoppingcart.orderItems.size() == 0}">
+                                        <h5 class="card-title text-dark">Your shopping cart looks empty</h5>
+                                        <p class="card-text text-dark">Add some cupcakes <a href="CreateOrderServlet">here</a></p>
+                                    </c:if>
+                                    <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
+                                        <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
+                                        <p class="card-text text-dark">Amount: ${item.amount}</p>
+                                        <form action="shoppingCartServlet" method="post">
+                                            <input type="hidden" name="orderItemId" value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
+                                            <input type="hidden" name="action" value="Remove">
+                                            <input type="submit" value="Remove">
                         </div>
                         <div class="card-body">
                             <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
@@ -90,6 +102,20 @@
                         </form>
                     </div>
                 </div>
+                                            <form action="shoppingCartServlet" method="post">
+                                                <input type="hidden" name="orderItemId" value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
+                                                <input type="hidden" name="action" value="Edit">
+                                                <input type="submit" value="Edit">
+
+                                        </form>
+                                    </c:forEach>
+                                </div>
+                                <div class="card-footer text-dark" style="background: #F2ECEB; text-align: center">Price: ${requestScope.shoppingcart.price} DKK</div>
+                                <form action="CheckoutServlet" method="post" style="display: flex; justify-content: center">
+                                    <input type="submit" value="Checkout">
+                                </form>
+                            </div>
+                        </div>
 
 
             </div>

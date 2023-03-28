@@ -29,8 +29,8 @@
     </jsp:attribute>
 
     <jsp:body>
-        <h6>${requestScope.errormessage}</h6>
-        <div class="container">
+        <h6 style="text-align: center">${requestScope.errormessage}</h6>
+        <div class="container" style="display: flex; justify-content: center">
         <form action="CreateOrderServlet" method="post">
             <div class="row justify-content-center">
                 <div class="col mx-auto">
@@ -57,38 +57,11 @@
                 </div>
             <br>
             </div>
-            <div class="row" style="margin-left: 1px">
-            <input style="background: #F2ECEB; color: #3c1460; width: 11em; margin-top: 4em; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
+            <div class="row justify-content-center" style="margin-left: 1px">
+            <input style="background: #F2ECEB; color: #3c1460; width: 195px; margin-top: 4em; margin-right: 20px; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
             </div>
         </form>
         </div>
-                <div style="display: flex; justify-content: center">
-                </div>
-
-        <c:if test="${sessionScope.shoppingcart != null}">
-            <h6>Shopping cart</h6>
-            <table style="border: 1px solid grey">
-                <tr style="border-bottom: 1px solid grey">
-                    <th style="border-right: 1px solid grey">Bottom</th>
-                    <th style="border-right: 1px solid grey">Topping</th>
-                    <th style="border-right: 1px solid grey">Amount</th>
-                    <th>Price</th>
-                </tr>
-                <c:forEach var="item" items="${sessionScope.shoppingcart.orderItems}">
-                    <tr style="border-bottom: 1px solid grey">
-                        <td style="border-right: 1px solid grey">${item.bottom.flavor}</td>
-                        <td style="border-right: 1px solid grey">${item.topping.flavor}</td>
-                        <td style="border-right: 1px solid grey">${item.amount}</td>
-                        <td>${item.price} DKK</td>
-                    </tr>
-                </c:forEach>
-                <tr>
-                    <form action="CheckoutServlet" method="post">
-                        <input type="submit" value="Checkout">
-                    </form>
-                </tr>
-            </table>
-        </c:if>
     </jsp:body>
 </t:pagetemplate>
 </body>

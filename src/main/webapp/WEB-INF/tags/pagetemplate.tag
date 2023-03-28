@@ -37,7 +37,7 @@
 <body class="cc-bg-blue">
 <header>
     <div style="background: #3c1460; display: flex; justify-content: center; padding: 10px;">
-    <img src="${pageContext.request.contextPath}/images/cupcakeimageClose.png" class="img-fluid" alt="...">
+    <img src="${pageContext.request.contextPath}/images/cupcakeimageClose.png" class="img-fluid">
     </div>
     <nav class="navbar navbar-expand-lg cc-bg-blue" style="border-bottom: solid 10px #F2ECEB">
         <div class="container mt-1">

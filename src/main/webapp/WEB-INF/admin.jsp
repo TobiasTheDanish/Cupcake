@@ -29,12 +29,12 @@
         <div class="mx-auto" style="width: 120px">
     View User List:
     <form action="AdminUserListServlet">
-        <input style="background: #F2ECEB; color: #3c1460; border: 2px solid #3c1460; margin-left: 17px" type="submit" value="Users">
+        <input style="background: #3c1460; color: #F2ECEB; border-radius: 20px; border: none; padding: 5px 15px; margin-left: 17px" type="submit" value="Users">
     </form>
     <br>
     View All Orders:
     <form action="AdminViewOrdersServlet">
-        <input style="background: #F2ECEB; color: #3c1460; border: 2px solid #3c1460; margin-left: 15px" type="submit" value="Orders">
+        <input style="background: #3c1460; color: #F2ECEB; border-radius: 20px; border: none; padding: 5px 15px; margin-left: 15px" type="submit" value="Orders">
     </form>
         </div>
     </div>

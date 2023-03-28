@@ -5,7 +5,6 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -14,16 +13,25 @@
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
 
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-        </c:if>
-
-        <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
-        </c:if>
+    <h1 style="color: #3c1460; font-size: xxx-large; text-align: center">Maybe the best <br> cupcakes in the world.</h1>
+    <h3 style="color: #3c1460; font-size: large; text-align: center">Make your first order today!</h3>
+    <div class="container justify-content-center" style="display: flex;">
+        <div class="row">
+            <div class="col">
+        <img style="width: 320px; height: 400px" src="images/cupcakelogo1.png">
+            </div>
+            <div class="col-2">
+            <form action="login.jsp">
+            <input type="submit" value="Log in" style="background: #3c1460; color: #F2ECEB; margin-top: 50px; width: 120px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
+            </input>
+            </form>
+            </div>
+            <div class="col">
+        <img style="width: 320px; height: 400px" src="images/cupcakelogo2.png">
+            </div>
+        </div>
+    </div>
 
     </jsp:body>
 
