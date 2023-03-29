@@ -67,7 +67,7 @@ public class CreateOrderServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/createOrder.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             Logger.getLogger("web").log(Level.WARNING, "NumberFormatException: [" + e.getMessage() + "]");
-            request.setAttribute("errormessage", "Unable to parse number");
+            request.setAttribute("errormessage", "Invalid input. Please enter your desired quantity in numbers");
             request.setAttribute("bottoms", bottoms);
             request.setAttribute("toppings", toppings);
             request.getRequestDispatcher("WEB-INF/createOrder.jsp").forward(request, response);

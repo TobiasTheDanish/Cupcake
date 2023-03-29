@@ -25,8 +25,16 @@ public class CheckoutServlet extends HttpServlet {
         Order order = (Order) request.getSession().getAttribute("shoppingcart");
 
         try {
-            OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
+            if(order.getPrice() == 0){
+                Order currentOrder = ShoppingCart.getOrder();
+                request.setAttribute("shoppingcart", currentOrder);
+                OrderFacade.deleteOrder(currentOrder.getId(), ApplicationStart.getConnectionPool());
 
+                request.setAttribute("message", "Error. Your shopping cart is empty");
+                request.getRequestDispatcher("WEB-INF/shoppingcart.jsp").forward(request, response);
+            }
+
+            OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
             request.getSession().setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             ShoppingCart.clear();
@@ -34,7 +42,7 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("message", "Succesfully checked out.");
             request.getRequestDispatcher("WEB-INF/checkout.jsp").forward(request, response);
         } catch (DatabaseException e) {
-            request.setAttribute("message", "Checkout unsuccesful, with following error message: " + e.getMessage());
+            request.setAttribute("message", "Checkout unsuccesful, your shopping cart is empty!");
             request.getRequestDispatcher("WEB-INF/checkout.jsp").forward(request, response);
         }
     }

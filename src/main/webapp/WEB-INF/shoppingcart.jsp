@@ -33,6 +33,7 @@
     </jsp:attribute>
 
     <jsp:body>
+        <td><p style="text-align: center;">${requestScope.message}</p></td>
         <div class="container-fluid" style="display: flex; justify-content: center;">
             <div class="row">
                 <div class="col-sm">
