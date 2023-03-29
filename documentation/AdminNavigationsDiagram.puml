@@ -1,0 +1,92 @@
+!pragma layout smetana
+@startuml
+'https://plantuml.com/state-diagram
+
+scale 650 width
+[*] --> NotLoggedIn
+
+state NotLoggedIn {
+  state Frontend {
+  [*] --> index.jsp
+    state index.jsp
+    state login.jsp
+    state registration.jsp
+  }
+  state Backend {
+    state LoginServlet
+    state RegistrationServlet
+  }
+
+  index.jsp --> login.jsp
+  registration.jsp <-- login.jsp : Not a user
+  login.jsp --> LoginServlet : Login attempt
+  LoginServlet --> login.jsp : Unsuccessful login
+  LoginServlet --> LoggedIn : Successful login
+
+  registration.jsp ---> RegistrationServlet : Registration attempt
+  RegistrationServlet ---> registration.jsp : Unsuccessful registration
+  RegistrationServlet -> LoginServlet : Successful registration
+}
+
+state LoggedIn {
+    [*] --> Admin : Role: admin
+    state Admin {
+      state AdminNavbar {
+        state MyOrders
+        state NavButtonAdmin
+        state Username
+        state LogOut
+        state ShoppingCart
+      }
+      state LoggedInFrontend {
+        state createOrder.jsp
+        state userOrders.jsp : See your orders
+        state admin.jsp : Main page for admin users
+        state adminOrders.jsp
+        state adminUserList.jsp
+        state shoppingcart.jsp
+        state checkout.jsp
+      }
+      state LoggedInBackend {
+        state CreateOrderServlet
+        state AdminHomePage
+        state OrderServlet
+        state AdminServlet
+        state AdminUserListServlet
+        state AdminViewOrdersServlet
+        state LogoutServlet
+        state ShoppingCartServlet
+        state CheckoutServlet
+      }
+
+      MyOrders --> OrderServlet : Get
+      OrderServlet ---> userOrders.jsp
+      OrderServlet -> error.jsp : Error getting orders from db
+
+      NavButtonAdmin --> AdminServlet : Get
+      AdminServlet ---> admin.jsp
+
+      admin.jsp ---> AdminUserListServlet
+      AdminUserListServlet ---> adminUserList.jsp : See all users
+
+      admin.jsp ---> AdminViewOrdersServlet : See all orders in database
+      AdminViewOrdersServlet ---> adminOrders.jsp
+
+      Username --> AdminHomePage
+      AdminHomePage --> CreateOrderServlet
+      CreateOrderServlet ---> createOrder.jsp
+      createOrder.jsp ---> CreateOrderServlet : Add cupcake to cart
+
+      LogOut --> LogoutServlet : Invalidate session
+      LogoutServlet ---> [*] : return to index
+
+
+      ShoppingCart --> ShoppingCartServlet
+      ShoppingCartServlet ---> shoppingcart.jsp : Show shopping cart
+      shoppingcart.jsp -> ShoppingCartServlet : Remove | Edit | Update
+      shoppingcart.jsp -> CheckoutServlet : Make order
+      CheckoutServlet ---> checkout.jsp
+      checkout.jsp --> CreateOrderServlet
+    }
+}
+@enduml
