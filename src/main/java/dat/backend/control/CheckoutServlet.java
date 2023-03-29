@@ -23,15 +23,24 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Order order = (Order) request.getSession().getAttribute("shoppingcart");
-        HttpSession session = request.getSession();
 
         try {
+            if(order.getPrice() == 0){
+                Order currentOrder = ShoppingCart.getOrder();
+                request.setAttribute("shoppingcart", currentOrder);
+                OrderFacade.deleteOrder(currentOrder.getId(), ApplicationStart.getConnectionPool());
+
+                request.setAttribute("message", "Error. Your shopping cart is empty");
+                request.getRequestDispatcher("WEB-INF/shoppingcart.jsp").forward(request, response);
+            }
+
             OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
+            request.getSession().setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             session.setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             ShoppingCart.clear();
-            session.setAttribute("shoppingcart", null);
+            request.getSession().setAttribute("shoppingcart", null);
             request.setAttribute("message", "Succesfully checked out.");
             request.getRequestDispatcher("WEB-INF/checkout.jsp").forward(request, response);
         } catch (DatabaseException e) {

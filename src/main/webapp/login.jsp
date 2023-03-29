@@ -14,9 +14,9 @@
     </jsp:attribute>
 
     <jsp:body>
+        <td><p style="text-align: center;">${requestScope.errormessage}</p></td>
         <div class="container justify-content-center" style="display: flex">
         <table>
-            <h6>${requestScope.errormessage}</h6>
             <form style="border: 2px solid #3c1460" action="login" method="post">
                 <tr>
                     <td><label style="color: #3c1460" for="email">Email: </label></td>

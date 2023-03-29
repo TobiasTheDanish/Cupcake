@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: basti
@@ -23,14 +24,22 @@
 </head>
 <body>
 <t:pagetemplate>
-<jsp:attribute name="header">
+    <jsp:attribute name="header">
          Shopping cart
     </jsp:attribute>
 
-<jsp:attribute name="footer">
+    <jsp:attribute name="footer">
         Shopping cart
     </jsp:attribute>
 
+    <jsp:body>
+        <td><p style="text-align: center;">${requestScope.message}</p></td>
+        <div class="container-fluid" style="display: flex; justify-content: center;">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card border-dark mb-3" style="background: #F2ECEB; max-width: 18rem;">
+                            <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title"> Shopping Cart</h5>
+                                <p class="card-subtitle text-secondary">Kunde: ${requestScope.shoppingcart.customer.username}</p>
 <jsp:body>
 <div class="container-fluid" style="display: flex; justify-content: center;">
     <div class="row">
