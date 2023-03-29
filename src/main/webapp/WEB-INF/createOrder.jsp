@@ -57,8 +57,8 @@
                 </div>
             <br>
             </div>
-            <div class="row justify-content-center" style="margin-left: 1px">
-            <input style="background: #F2ECEB; color: #3c1460; width: 195px; margin-top: 4em; margin-right: 20px; border-radius: 10px; border: solid 2px #3c1460" type="submit" value="Add to cart">
+            <div class="container d-flex justify-content-center">
+            <input style="background: #3c1460; color: #F2ECEB; margin-top: 50px; padding: 4px 20px; height: 35px; border: 2px solid #3c1460; border-radius: 20px" type="submit" value="Add to cart" >
             </div>
         </form>
         </div>

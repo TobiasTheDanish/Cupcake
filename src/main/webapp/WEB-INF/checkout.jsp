@@ -25,10 +25,14 @@
     </jsp:attribute>
 
     <jsp:body>
+        <div class="container d-flex justify-content-center">
         <h4>${requestScope.message}</h4>
+        </div>
+        <div class="container d-flex justify-content-center">
         <form action="CreateOrderServlet" method="get">
-            <input type="submit" value="Create Order Here">
+            <input type="submit" value="Create Order Here" style="background: #3c1460; color: #F2ECEB; width: 180px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
         </form>
+        </div>
     </jsp:body>
 </t:pagetemplate>
 </body>

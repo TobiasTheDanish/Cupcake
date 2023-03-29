@@ -38,7 +38,7 @@
             <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title" style="color: #3c1460;"> Shopping
                 Cart</h5>
                 <p class="card-subtitle text-secondary">
-                    Kunde: ${sessionScope.shoppingcart.customer.username}</p>
+                    Customer: ${sessionScope.shoppingcart.customer.username}</p>
 
             </div>
             <div class="card-body" style="background: #F2ECEB">
@@ -67,7 +67,7 @@
                                 <input type="hidden" name="orderItemId"
                                        value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
                                 <input type="hidden" name="action" value="Remove">
-                                <input type="submit" value="Remove" style="margin-right: 1em;">
+                                <input type="submit" value="Remove" style="margin-right: 1em; background: #3c1460; color: #F2ECEB; padding: 4px 10px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
 
                             </form>
 
@@ -76,7 +76,7 @@
                                     <input type="hidden" name="orderItemId"
                                            value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
                                     <input type="hidden" name="action" value="Edit">
-                                    <input type="submit" value="Edit">
+                                    <input type="submit" value="Edit" style="background: #3c1460; color: #F2ECEB; padding: 4px 10px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
 
                                 </form>
                             </c:if>
@@ -85,7 +85,7 @@
                                     <input type="hidden" name="orderItemId"
                                            value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
                                     <input type="hidden" name="action" value="Update">
-                                    <input type="submit" value="Update">
+                                    <input type="submit" value="Update" style="background: #3c1460; color: #F2ECEB; padding: 4px 10px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
 
                                 </form>
                             </c:if>
@@ -98,7 +98,7 @@
                 <div class="card-footer bg-transparent text-dark">
                     <p>Total price: ${sessionScope.shoppingcart.price} DKK</p>
                     <form action="CheckoutServlet" method="post">
-                        <input type="submit" value="Checkout">
+                        <input type="submit" value="Checkout" style="background: #3c1460; color: #F2ECEB; padding: 4px 10px; height: 35px; border: 2px solid #3c1460; border-radius: 20px">
                     </form>
                 </div>
             </c:if>
