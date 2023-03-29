@@ -23,99 +23,88 @@
 </head>
 <body>
 <t:pagetemplate>
-    <jsp:attribute name="header">
+<jsp:attribute name="header">
          Shopping cart
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
+<jsp:attribute name="footer">
         Shopping cart
     </jsp:attribute>
 
-    <jsp:body>
-        <div class="container-fluid" style="display: flex; justify-content: center;">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card border-dark mb-3" style="background: #F2ECEB; max-width: 18rem;">
-                        <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title"> Shopping
-                            Cart</h5>
-                            <p class="card-subtitle text-secondary">
-                                Kunde: ${requestScope.shoppingcart.customer.username}</p>
+<jsp:body>
+<div class="container-fluid" style="display: flex; justify-content: center;">
+    <div class="row">
+        <div class="card border-dark my-4" style="background: #F2ECEB; max-width: 18rem;">
+            <div class="card-header text-dark" style="background: #F2ECEB"><h5 class="card-title" style="color: #3c1460;"> Shopping
+                Cart</h5>
+                <p class="card-subtitle text-secondary">
+                    Kunde: ${sessionScope.shoppingcart.customer.username}</p>
 
-                        </div>
-                        <div class="card-body" style="background: #F2ECEB">
-                            <c:if test="${requestScope.shoppingcart.orderItems.size() == 0}">
-                                <h5 class="card-title text-dark">Your shopping cart looks empty</h5>
-                                <p class="card-text text-dark">Add some cupcakes <a href="CreateOrderServlet">here</a>
-                                </p>
-                            </c:if>
-
-
-                        <div class="card-body">
-                            <c:forEach var="item" items="${requestScope.shoppingcart.orderItems}">
-                                <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
-                                <c:if test="${requestScope.editing==null || requestScope.editing != requestScope.shoppingcart.orderItems.indexOf(item) }">
-                                    <p class="card-text text-dark">Amount: ${item.amount}</p>
-
-                                </c:if>
-                                <c:if test="${requestScope.editing != null && requestScope.editing == requestScope.shoppingcart.orderItems.indexOf(item)}">
-                                    <input form="updateForm" type="text" name="newAmount" value="${item.amount}">
+            </div>
+            <div class="card-body" style="background: #F2ECEB">
+                <c:if test="${sessionScope.shoppingcart.orderItems.size() == 0}">
+                    <h5 class="card-title text-dark">Your shopping cart looks empty</h5>
+                    <p class="card-text text-dark">Add some cupcakes <a href="CreateOrderServlet">here</a>
+                    </p>
+                </c:if>
 
 
-                                </c:if>
+                <c:if test="${sessionScope.shoppingcart.orderItems.size() != 0}">
+                    <c:forEach var="item" items="${sessionScope.shoppingcart.orderItems}">
+                        <h5 class="card-title text-dark">${item.bottom.flavor} & ${item.topping.flavor}</h5>
+                        <c:if test="${requestScope.editing==null || requestScope.editing != sessionScope.shoppingcart.orderItems.indexOf(item) }">
+                            <p class="card-text text-dark">Amount: ${item.amount}</p>
+
+                        </c:if>
+                        <c:if test="${requestScope.editing != null && requestScope.editing == sessionScope.shoppingcart.orderItems.indexOf(item)}">
+                            <div style="display: flex; flex-direction: row;">
+                                <label style="margin-right: 1em;" for="updateInput">Amount: </label>
+                                <input style="margin-bottom: 1em; width: 75px;" id="updateInput" form="updateForm" type="text" name="newAmount" value="${item.amount}">
+                            </div>
+                        </c:if>
+                        <div style="display: flex; flex-direction: row;">
+                            <form action="shoppingCartServlet" method="post">
+                                <input type="hidden" name="orderItemId"
+                                       value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
+                                <input type="hidden" name="action" value="Remove">
+                                <input type="submit" value="Remove" style="margin-right: 1em;">
+
+                            </form>
+
+                            <c:if test="${requestScope.editing==null || requestScope.editing != sessionScope.shoppingcart.orderItems.indexOf(item) }">
                                 <form action="shoppingCartServlet" method="post">
                                     <input type="hidden" name="orderItemId"
-                                           value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
-                                    <input type="hidden" name="action" value="Remove">
-                                    <input type="submit" value="Remove">
+                                           value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
+                                    <input type="hidden" name="action" value="Edit">
+                                    <input type="submit" value="Edit">
 
                                 </form>
+                            </c:if>
+                            <c:if test="${requestScope.editing != null && requestScope.editing == sessionScope.shoppingcart.orderItems.indexOf(item)}">
+                                <form id="updateForm" action="shoppingCartServlet" method="post">
+                                    <input type="hidden" name="orderItemId"
+                                           value="${sessionScope.shoppingcart.orderItems.indexOf(item)}">
+                                    <input type="hidden" name="action" value="Update">
+                                    <input type="submit" value="Update">
 
-                                <c:if test="${requestScope.editing==null || requestScope.editing != requestScope.shoppingcart.orderItems.indexOf(item) }">
-                                    <form action="shoppingCartServlet" method="post">
-                                        <input type="hidden" name="orderItemId"
-                                               value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
-                                        <input type="hidden" name="action" value="Edit">
-                                        <input type="submit" value="Edit">
-
-                                    </form>
-                                </c:if>
-                                <c:if test="${requestScope.editing != null && requestScope.editing == requestScope.shoppingcart.orderItems.indexOf(item)}">
-                                    <form id="updateForm" action="shoppingCartServlet" method="post">
-                                        <input type="hidden" name="orderItemId"
-                                               value="${requestScope.shoppingcart.orderItems.indexOf(item)}">
-                                        <input type="hidden" name="action" value="Update">
-                                        <input type="submit" value="Update">
-
-                                    </form>
-                                </c:if>
-
-                            </c:forEach>
+                                </form>
+                            </c:if>
                         </div>
-                        <div class="card-footer bg-transparent text-dark">Price: ${requestScope.shoppingcart.price}
-                            DKK
-                        </div>
-                        <form action="CheckoutServlet" method="post">
-                            <input type="submit" value="Checkout">
-                        </form>
-                    </div>
+
+                    </c:forEach>
+                </c:if>
+            </div>
+            <c:if test="${sessionScope.shoppingcart.orderItems.size() != 0}">
+                <div class="card-footer bg-transparent text-dark">
+                    <p>Total price: ${sessionScope.shoppingcart.price} DKK</p>
+                    <form action="CheckoutServlet" method="post">
+                        <input type="submit" value="Checkout">
+                    </form>
                 </div>
-
-
-            </div>
-            <div class="card-footer text-dark" style="background: #F2ECEB; text-align: center">
-                Price: ${requestScope.shoppingcart.price} DKK
-            </div>
-
+            </c:if>
         </div>
+        </jsp:body>
 
-
-
-
-        <br>
-        <br>
-        <br>
-    </jsp:body>
-
-</t:pagetemplate>
+        </t:pagetemplate>
 </body>
 </html>

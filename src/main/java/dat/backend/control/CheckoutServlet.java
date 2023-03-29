@@ -23,14 +23,15 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Order order = (Order) request.getSession().getAttribute("shoppingcart");
+        HttpSession session = request.getSession();
 
         try {
             OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
 
-            request.getSession().setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
+            session.setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             ShoppingCart.clear();
-            request.getSession().setAttribute("shoppingcart", null);
+            session.setAttribute("shoppingcart", null);
             request.setAttribute("message", "Succesfully checked out.");
             request.getRequestDispatcher("WEB-INF/checkout.jsp").forward(request, response);
         } catch (DatabaseException e) {

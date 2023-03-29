@@ -244,11 +244,7 @@ public class OrderMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, currentOrder);
 
-                int rowsAffected = ps.executeUpdate();
-
-                if (rowsAffected == 0) {
-                    throw new DatabaseException("Error deleting order. 0 rows affected");
-                }
+                ps.executeUpdate();
             }
             sql = "DELETE FROM orders WHERE order_id = ?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -257,7 +253,7 @@ public class OrderMapper {
                 int rowsAffected = ps.executeUpdate();
 
                 if (rowsAffected == 0) {
-                    throw new DatabaseException("Error deleting order. 0 rows affected");
+                    throw new DatabaseException("Error deleting order. 0 rows affected in orders");
                 }
             }
 
