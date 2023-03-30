@@ -238,7 +238,7 @@ public class OrderMapper {
     }
 
     static void deleteOrder(int currentOrder, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "DELETE FROM orderLinking WHERE order_id = ?";
+        String sql = "DELETE FROM orderlinking WHERE order_id = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
