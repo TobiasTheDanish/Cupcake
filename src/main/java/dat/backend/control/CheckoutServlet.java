@@ -25,19 +25,10 @@ public class CheckoutServlet extends HttpServlet {
         Order order = (Order) request.getSession().getAttribute("shoppingcart");
 
         try {
-            if(order.getPrice() == 0){
-                Order currentOrder = ShoppingCart.getOrder();
-                request.setAttribute("shoppingcart", currentOrder);
-                OrderFacade.deleteOrder(currentOrder.getId(), ApplicationStart.getConnectionPool());
-
-                request.setAttribute("message", "Error. Your shopping cart is empty");
-                request.getRequestDispatcher("WEB-INF/shoppingcart.jsp").forward(request, response);
-            }
-
             OrderFacade.createOrder(order, ApplicationStart.getConnectionPool());
             request.getSession().setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
-            session.setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
+            //session.setAttribute("user", UserFacade.getUser(ApplicationStart.getConnectionPool(), order.getCustomer().getId()));
 
             ShoppingCart.clear();
             request.getSession().setAttribute("shoppingcart", null);
