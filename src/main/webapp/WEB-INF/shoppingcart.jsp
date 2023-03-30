@@ -32,6 +32,10 @@
         Shopping cart
     </jsp:attribute>
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <jsp:body>
 <div class="container-fluid" style="display: flex; justify-content: center;">
     <div class="row">
