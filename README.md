@@ -21,9 +21,9 @@ T.B.D.
 2. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
    1. Clone: `git clone git@github.com:jonbertelsen/startcode_2sem_2022.git ditprojektnavn`
    2. Slet .git folderen, så du kan gøre projektet til dit eget git-projekt
-      1. > `rm -rf .git/`
+      - `rm -rf .git/`
    3. Opret dit eget git repository:
-      1. > `git init`
+      - `git init`
 2. Det er en god idé at ændre folder-navnet inden du åbner projektet i IntelliJ. Det kan også være en god ide at åbne pom.xml i en simpel editor og rette "name" og "artifactid" før du åbner projektet i IntelliJ. På den måde er navngivningen korrekt fra starten.
 3. Åbn Workbench og kør en tilpasset (med dit databasenavn i stedet for `startcode`) version af sql-filen `startcode.sql`, som ligger i mappen `resources`. Den opretter en database med en user-tabel og en test-database.
 4. Du skal evt. ændre kodeord til databasen i projektet. Det gøres i filerne: `/persistence/ConnectionPool` i linie 14 og 15. Du skal også ændre i UserMapperTest.
