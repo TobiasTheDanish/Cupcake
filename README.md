@@ -20,7 +20,7 @@ T.B.D.
 1. Beslut dig for hvad projektets database skal hedde.
 2. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
    1. Clone: 
-      - `git clone git@github.com:jonbertelsen/startcode_2sem_2022.git ditprojektnavn`
+      - ```git clone git@github.com:jonbertelsen/startcode_2sem_2022.git ditprojektnavn```
    2. Slet .git folderen, så du kan gøre projektet til dit eget git-projekt
       - `rm -rf .git/`
    3. Opret dit eget git repository:
